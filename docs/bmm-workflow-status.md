@@ -12,7 +12,7 @@ WORKFLOW_PATH: greenfield-level-3.yaml
 ## Current State
 
 CURRENT_PHASE: 1
-CURRENT_WORKFLOW: brainstorm-project
+CURRENT_WORKFLOW: brainstorm-project - Complete
 CURRENT_AGENT: analyst
 PHASE_1_COMPLETE: false
 PHASE_2_COMPLETE: false
@@ -21,10 +21,10 @@ PHASE_4_COMPLETE: false
 
 ## Next Action
 
-NEXT_ACTION: Guide me through Brainstorming
-NEXT_COMMAND: brainstorm-project
+NEXT_ACTION: Produce Project Brief
+NEXT_COMMAND: product-brief
 NEXT_AGENT: analyst
 
 ---
 
-_Last Updated: 2025-10-30_
+_Last Updated: fredag 31. oktober 2025_
