@@ -200,6 +200,7 @@ Exit Point: The session ends when the student logs out or closes the website.
 ## AI Integration
 
 We use Gemini 2.5 pro via the Gemini API as our primary model for quiz generation. This gives us a single hosted endpoint with consistent behavior across collaborators—no local GPU or setup beyond an API key.
+- Library: Pydantic AI see technical research: @docs/technical-research-gemini-libraries-1. november 2025.md
 
 - Tasks: Generate multiple-choice quizzes from entered text.
 - Prompts & outputs: Task-specific prompts for quizzes. Return multiple-choice items as JSON with a question, an options array, and a correct answer index. Sampling temperature is configurable, and max_output_tokens caps response length.
