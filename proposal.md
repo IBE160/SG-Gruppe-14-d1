@@ -136,6 +136,9 @@ Entry Point: Student clicks a specific lecture note from Course Page.
 		- Each question is presented with four answer alternatives, labeled (e.g., 1–4).
 			- *Example: A question followed by four numbered answer options — e.g., "Question 1" with "Option 1," "Option 2," "Option 3," and "Option 4."*
 		- Only one answer per question is correct.
+		- Each quiz contains a fixed number of questions:
+			- 10 questions for Lecture Note quizzes.
+			- 20 questions for Course-Level quizzes.
 	- Layout:
 		- The quiz content is displayed using markdown-style formatting for clear, structured readability (e.g., headings, numbered lists, and clean text layout).
 		- All questions and their four answer options appear in sequence at the top of the page.
