@@ -1,7 +1,7 @@
-# {{project_name}} - Product Requirements Document
+﻿# IBE160 - Product Requirements Document
 
-**Author:** {{user_name}}
-**Date:** {{date}}
+**Author:** BIP
+**Date:** 20. november 2025
 **Version:** 1.0
 
 ---
@@ -164,33 +164,39 @@ The frontend, built with Next.js, will be a responsive web application accessibl
 
 Requirements must be decomposed into epics and bite-sized stories (200k context limit).
 
-**Next Step:** Run `workflow epics-stories` to create the implementation breakdown.
+**Next Step:** Run workflow epics-stories to create the implementation breakdown.
 
 ---
 
 ## References
 
-{{#if product_brief_path}}
-
-- Product Brief: {{product_brief_path}}
-  {{/if}}
-  {{#if domain_brief_path}}
-- Domain Brief: {{domain_brief_path}}
-  {{/if}}
-  {{#if research_documents}}
-- Research: {{research_documents}}
-  {{/if}}
+- Product Brief: [product-brief.md](product-brief.md)
+- Technical Research: [technical-research-gemini-libraries-1. november 2025.md](technical-research-gemini-libraries-1. november 2025.md)
+- User Research: [user-research-report-1. november 2025.md](user-research-report-1. november 2025.md)
 
 ---
 
-## Next Steps
+## ✅ PRD Complete
 
-1. **Epic & Story Breakdown** - Run: `workflow epics-stories`
-2. **UX Design** (if UI) - Run: `workflow ux-design`
-3. **Architecture** - Run: `workflow create-architecture`
+Your product requirements are documented and ready for implementation.
+
+**Created:**
+
+- **PRD.md** - Complete requirements adapted to Web Application (SPA) and Education Technology
+
+### Next Steps
+
+1.  **Epic Breakdown** (Required)
+    Run: workflow create-epics-and-stories to decompose requirements into implementable stories
+
+2.  **UX Design** (If UI exists)
+    Run: workflow ux-design for detailed user experience design
+
+3.  **Architecture** (Recommended)
+    Run: workflow create-architecture for technical architecture decisions
 
 ---
 
-_This PRD captures the essence of {{project_name}} - {{product_magic_summary}}_
+_The magic of your product - automating the creation of study materials to provide a structured, distraction-free learning environment - is woven throughout the PRD and will guide all subsequent work._
 
-_Created through collaborative discovery between {{user_name}} and AI facilitator._
+_Created through collaborative discovery between BIP and AI facilitator._
