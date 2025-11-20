@@ -1,4 +1,4 @@
-﻿# IBE160 - Product Requirements Document
+# IBE160 - Product Requirements Document
 
 **Author:** BIP
 **Date:** 20. november 2025
@@ -51,24 +51,24 @@ Success for the AI Study Buddy means:
 
 ### MVP - Minimum Viable Product
 
-- **User Registration & Authentication:** Securely create and log into accounts.
-- **Lecture Note Management:** Full Create, Read, Update, Delete (CRUD) for notes.
-- **Quiz Management:** Create and delete quizzes generated from notes.
-- **Basic Quiz Listing:** A simple, single list view for all generated quizzes.
-- **Core Accessibility:** Foundational support for screen readers.
+-   **User Registration & Authentication:** Securely create and log into accounts.
+-   **Lecture Note Management:** Full Create, Read, Update, Delete (CRUD) for notes.
+-   **Quiz Management:** Create and delete quizzes generated from notes.
+-   **Basic Quiz Listing:** A simple, single list view for all generated quizzes.
+-   **Core Accessibility:** Foundational support for screen readers.
 
 ### Growth Features (Post-MVP)
 
-- **Expanded Content Generation:** Create flashcards, summaries, and keywords from notes.
-- **Advanced Organization:** Implement folder and tag-based organization for notes and quizzes.
-- **Search & Filtering:** Allow users to quickly find materials.
-- **Analytics:** Introduce a progress tracking dashboard to monitor study habits and performance.
+-   **Expanded Content Generation:** Create flashcards, summaries, and keywords from notes.
+-   **Advanced Organization:** Implement folder and tag-based organization for notes and quizzes.
+-   **Search & Filtering:** Allow users to quickly find materials.
+-   **Analytics:** Introduce a progress tracking dashboard to monitor study habits and performance.
 
 ### Vision (Future)
 
-- **AI Chat Study Companion:** An interactive chat interface for asking questions about study materials.
-- **Spaced Repetition System (SRS):** An intelligent algorithm to schedule reviews for optimal long-term retention.
-- **Gamification:** Introduce elements like score sharing and study streaks to boost motivation.
+-   **AI Chat Study Companion:** An interactive chat interface for asking questions about study materials.
+-   **Spaced Repetition System (SRS):** An intelligent algorithm to schedule reviews for optimal long-term retention.
+-   **Gamification:** Introduce elements like score sharing and study streaks to boost motivation.
 
 ---
 
@@ -110,51 +110,56 @@ The frontend, built with Next.js, will be a responsive web application accessibl
 ## Functional Requirements
 
 ### User Account Management
-- **FR-1:** Users must be able to create a new account using an email and password.
-- **FR-2:** Users must be able to log in to their account and log out.
-- **FR-3:** The system must persist user sessions, automatically logging them in on return visits.
+- **FR-1:** Users must be able to create a new account using an email and password. (MVP)
+- **FR-2:** Users must be able to log in to their account and log out. (MVP)
+- **FR-3:** The system must persist user sessions, automatically logging them in on return visits. (MVP)
 
 ### Course & Note Management
-- **FR-4:** Users must be able to create, read, update, and delete courses. Each course must have a title and an optional description.
-- **FR-5:** Users must be able to create, read, update, and delete lecture notes within a course. Each note consists of a title and text content.
-- **FR-6:** The dashboard must display a list of all user-created courses.
-- **FR-7:** The course page must display a list of all lecture notes associated with that course.
+- **FR-4:** Users must be able to create, read, update, and delete courses. Each course must have a title and an optional description. (MVP)
+- **FR-5:** Users must be able to create, read, update, and delete lecture notes within a course. Each note consists of a title and text content. (MVP)
+- **FR-6:** The dashboard must display a list of all user-created courses. (MVP)
+- **FR-7:** The course page must display a list of all lecture notes associated with that course. (MVP)
 
 ### Quiz Generation
-- **FR-8:** Users must be able to generate a multiple-choice quiz from the content of a single lecture note.
-- **FR-9:** Users must be able to generate a single multiple-choice quiz from the combined content of all notes within a course. This function is only enabled if the course contains at least two lecture notes.
-- **FR-10:** The system must provide a loading indicator while the AI is generating a quiz.
-- **FR-11:** If a quiz already exists for a note or course, the system must ask the user for confirmation before generating a new one to replace it.
+- **FR-8:** Users must be able to generate a multiple-choice quiz from the content of a single lecture note. (MVP)
+- **FR-9:** Users must be able to generate a single multiple-choice quiz from the combined content of all notes within a course. This function is only enabled if the course contains at least two lecture notes. (MVP)
+- **FR-10:** The system must provide a loading indicator while the AI is generating a quiz. (MVP)
+- **FR-11:** If a quiz already exists for a note or course, the system must ask the user for confirmation before generating a new one to replace it. (MVP)
 
 ### Quiz Interaction
-- **FR-12:** Generated quizzes must be displayed in a clean, readable, and structured format (e.g., using markdown).
-- **FR-13:** Lecture-level quizzes must contain exactly 10 questions, and course-level quizzes must contain exactly 20 questions.
-- **FR-14:** Each quiz question must be presented with four answer options, only one of which is correct.
-- **FR-15:** A separate "Correct Answers" section must be displayed at the end of the quiz, clearly listing the correct option for each question.
-- **FR-16:** Users must have an option to copy the entire quiz content (questions and answers) to their clipboard.
-- **FR-17:** Users must be able to delete a previously generated quiz.
+- **FR-12:** Generated quizzes must be displayed in a clean, readable, and structured format (e.g., using markdown). (MVP)
+- **FR-12a:** Users must be able to view a simple, single list of all their generated quizzes. (MVP)
+- **FR-13:** Lecture-level quizzes must contain exactly 10 questions, and course-level quizzes must contain exactly 20 questions. (MVP)
+- **FR-14:** Each quiz question must be presented with four answer options, only one of which is correct. (MVP)
+- **FR-15:** A separate "Correct Answers" section must be displayed at the end of the quiz, clearly listing the correct option for each question. (MVP)
+- **FR-16:** Users must have an option to copy the entire quiz content (questions and answers) to their clipboard. (MVP)
+- **FR-17:** Users must be able to delete a previously generated quiz. (MVP)
+- **FR-18:** Users must be able to interact with a dedicated quiz-taking interface. (Growth)
+- **FR-19:** Users must be able to submit their answers for each question within the quiz-taking interface. (Growth)
+- **FR-20:** The system must provide immediate feedback on whether the submitted answer for each question is correct or incorrect. (Growth)
+- **FR-21:** The system must track and display the user's progress within a quiz (e.g., questions answered, score). (Growth)
 
 ---
 
 ## Non-Functional Requirements
 
 ### Performance
-- **NFR-1:** The application must maintain responsive performance and a fluid user experience, even when processing large text inputs for quiz generation.
-- **NFR-2:** API response times for core user actions (e.g., creating notes, generating quizzes) must be optimized to minimize wait times.
+- **NFR-1:** The application must maintain responsive performance and a fluid user experience, even when processing large text inputs for quiz generation. (MVP)
+- **NFR-2:** API response times for core user actions (e.g., creating notes, generating quizzes) must be optimized to minimize wait times. (MVP)
 
 ### Security
-- **NFR-3:** All user data, particularly personal information and note content, must be handled securely and encrypted in transit (TLS) and at rest.
-- **NFR-4:** The system must enforce strict authorization, ensuring a user can only access and manage their own data.
-- **NFR-5:** User authentication credentials (passwords) must be securely hashed and salted.
+- **NFR-3:** All user data, particularly personal information and note content, must be handled securely and encrypted in transit (TLS) and at rest. (MVP)
+- **NFR-4:** The system must enforce strict authorization, ensuring a user can only access and manage their own data. (MVP)
+- **NFR-5:** User authentication credentials (passwords) must be securely hashed and salted. (MVP)
 
 ### Scalability
-- **NFR-6:** The backend architecture must be designed to scale efficiently to handle a growing user base and increasing data volume without degradation in performance.
+- **NFR-6:** The backend architecture must be designed to scale efficiently to handle a growing user base and increasing data volume without degradation in performance. (MVP)
 
 ### Accessibility & Usability
-- **NFR-7:** The application must be fully responsive, providing an optimal and consistent user experience on both desktop and mobile web browsers.
-- **NFR-8:** The application must comply with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards.
-- **NFR-9:** All application features must be navigable and operable using only a keyboard.
-- **NFR-10:** The application must be compatible with modern screen readers (e.g., VoiceOver, NVDA) to ensure it is usable by visually impaired users.
+- **NFR-7:** The application must be fully responsive, providing an optimal and consistent user experience on both desktop and mobile web browsers. (MVP)
+- **NFR-8:** The application must comply with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. (MVP)
+- **NFR-9:** All application features must be navigable and operable using only a keyboard. (MVP)
+- **NFR-10:** The application must be compatible with modern screen readers (e.g., VoiceOver, NVDA) to ensure it is usable by visually impaired users. (MVP)
 
 ---
 
