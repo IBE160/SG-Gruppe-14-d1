@@ -88,7 +88,15 @@ This epic focuses on the core AI functionality of generating, displaying, and ma
 
 This epic provides the user-facing functionality for viewing, using, and managing the generated quizzes in a clean and structured format.
 
----
+### User Stories
+
+-   **Story 5.1:** As a student, I want to access a list of all my previously generated quizzes, so that I can easily find and retake them.
+-   **Story 5.2:** As a student, I want to view a generated quiz in a dedicated quiz-taking interface, so that I can attempt the questions interactively.
+-   **Story 5.3:** As a student, I want to select an answer for each multiple-choice question within the quiz interface, so that I can test my knowledge.
+-   **Story 5.4:** As a student, I want to submit my answers and receive immediate feedback on whether my answers are correct or incorrect, so that I can learn from my mistakes.
+-   **Story 5.5:** As a student, I want to see a summary of my quiz results (e.g., score, number of correct/incorrect answers) after completing a quiz, so that I can track my progress.
+-   **Story 5.6:** As a student, I want to have the option to review the correct answers for a quiz after completing it, so that I can reinforce my learning.
+-   **Story 5.7:** As a student, I want to mark a quiz as "completed" or "mastered" so that I can keep track of my study progress.
 
 ## Epic 6: Accessibility Compliance
 
