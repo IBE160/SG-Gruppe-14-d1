@@ -3,306 +3,620 @@
 **Author:** BIP
 **Date:** 20. november 2025
 **Project Level:** Medium
-**Target Scale:** Web Application (SPA)
+**Target Scale:** N/A (not specified in PRD)
 
 ---
 
 ## Overview
 
-This document provides the complete epic and story breakdown for the AI Study Buddy application, decomposing the requirements from the [PRD](./PRD.md) into implementable stories.
+This document provides the complete epic and story breakdown for AI Study Buddy, decomposing the requirements from the [PRD](./PRD.md) into implementable stories.
 
-The project is broken down into the following epics, designed to deliver incremental value and build upon a solid foundation:
+### Epics Summary
 
-- **Epic 1: Foundational Setup & Core Infrastructure:** Establishes the complete project skeleton, including repository setup, a CI/CD pipeline, database schema, and the basic frontend and backend application structures. This epic is foundational for all subsequent development.
-- **Epic 2: User Authentication & Session Management:** Implements a secure system for users to create accounts, log in, and maintain persistent sessions, ensuring that all user data is protected.
-- **Epic 3: Course and Note Management:** Delivers the core content creation functionality, allowing users to create, view, update, and delete their courses and lecture notes.
-- **Epic 4: AI-Powered Quiz Generation:** Focuses on the core "magic" of the application by implementing the AI-driven service to generate multiple-choice quizzes from user notes.
-- **Epic 5: Quiz Interaction & Presentation:** Provides the user-facing functionality for viewing, using, and managing the generated quizzes in a clean and structured format.
-- **Epic 6: Accessibility Compliance:** Ensures the application is fully accessible by implementing WCAG 2.1 AA standards, including full keyboard navigation and screen reader compatibility.
+*   **Epic 1: User Account & Core Infrastructure**
+    *   **Goal:** Establish secure user accounts and the foundational application infrastructure to support all subsequent features.
+    *   **Scope:** User registration, login, logout, persistent sessions, basic application setup, and core dependencies. This epic also lays the groundwork for NFR-2 (Security) for user data handling.
+    *   **Rationale:** This epic addresses the fundamental need for user management and ensures a stable, secure base for the entire application, directly covering FR-1.
 
----
+*   **Epic 2: Course & Note Management**
+    *   **Goal:** Enable users to effectively create, organize, and manage their study materials through courses and lecture notes.
+    *   **Scope:** Full CRUD operations for courses and lecture notes (title and text content), dashboard display of all user-created courses, and listing associated lecture notes within each course page.
+    *   **Rationale:** This epic directly implements FR-2 and FR-3, providing users with the essential tools to input and structure their study content.
 
-## Epic 1: Foundational Setup & Core Infrastructure (MVP)
+*   **Epic 3: Quiz Generation & Basic Listing**
+    *   **Goal:** Deliver the core functionality allowing users to generate AI-powered multiple-choice quizzes and access them easily.
+    *   **Scope:** Generating 10-question quizzes from single notes or 20-question quizzes from courses (if ≥ 2 notes), displaying quizzes in a clean format with correct answers, options to copy or delete quiz content, and a simple, single list view of all generated quizzes.
+    *   **Rationale:** This epic directly fulfills FR-4, FR-5, and FR-6, representing the primary value proposition of the AI Study Buddy.
 
-To establish the complete project skeleton, including repository setup, a CI/CD pipeline, database schema, and the basic frontend and backend application structures, creating a stable foundation for all future development.
+*   **Epic 4: Enhanced Quiz Interaction (Growth Feature)**
+    *   **Goal:** Elevate the quiz experience by providing an interactive interface with immediate feedback and progress tracking.
+    *   **Scope:** Development of a dedicated quiz-taking interface, functionality for users to submit answers, instant feedback on correctness, and mechanisms to track progress and scores within each quiz.
+    *   **Rationale:** This epic addresses FR-7, enhancing user engagement and providing a more robust learning tool as a post-MVP growth feature.
 
--   **Story 1.1:** As a user, I want the application to be built on a solid foundation, so that my experience is reliable and new features are added consistently. (MVP)
-    *   **FR/NFRs:** NFR-1, NFR-6
-    *   **Acceptance Criteria:**
-        *   Project repository is initialized and configured.
-        *   Basic CI/CD pipeline is set up for automated builds and tests.
-        *   Core application structure for frontend and backend is in place.
-
--   **Story 1.2:** As a user, I want to trust that my study notes are saved securely, so that I can use the app without worrying about data loss. (MVP)
-    *   **FR/NFRs:** NFR-3, NFR-4, NFR-5
-    *   **Acceptance Criteria:**
-        *   Database schema is defined for secure storage of user data and notes.
-        *   User data (including notes) is encrypted at rest and in transit.
-        *   Basic authorization mechanisms are implemented to prevent unauthorized access.
-
--   **Story 1.3:** As a user, I want the application to feel responsive and functional from the very first visit, so that I know it's a quality product. (MVP)
-    *   **FR/NFRs:** NFR-1, NFR-7
-    *   **Acceptance Criteria:**
-        *   Initial page load time is optimized for responsiveness.
-        *   Basic application functions (e.g., navigation, button clicks) respond fluidly.
+*   **Epic 5: Non-Functional Requirements & System Polish**
+    *   **Goal:** Ensure the AI Study Buddy meets crucial non-functional standards for performance, comprehensive security, scalability, full responsiveness, and accessibility.
+    *   **Scope:** Implementing NFR-1 (Responsive Performance), NFR-2 (Secure Data Handling beyond basic account security), NFR-3 (Scalable Backend Architecture), NFR-4 (Full Responsiveness across devices), and NFR-5 (WCAG 2.1 Level AA Compliance, including keyboard navigation and screen reader compatibility). This includes integrating these concerns throughout the application.
+    *   **Rationale:** Achieving these NFRs is vital for the application's stability, reliability, user trust, and overall quality, ensuring a professional and inclusive user experience.
 
 ---
 
-## Epic 2: User Authentication & Session Management (MVP)
+## Epic 1: User Account & Core Infrastructure
 
-This epic covers all functionality related to user accounts, from creation to session management.
+**Goal:** Establish secure user accounts and the foundational application infrastructure to support all subsequent features.
 
-### User Stories
+### Story 1.1: Project Initialization and Basic Setup
 
--   **Story 2.1:** As a new user, I want to sign up with my email and password so that I can create a secure, personal account. (MVP)
-    *   **FR/NFRs:** FR-1
-    *   **Acceptance Criteria:**
-        *   A registration form allows users to enter email and password.
-        *   Passwords are securely hashed and salted before storage (NFR-5).
-        *   New user accounts are successfully created and stored in the database.
-        *   Appropriate error messages are displayed for invalid input (e.g., email format, password strength).
+As a developer,
+I want the project to be initialized with core dependencies and a basic structure,
+So that I can begin developing features on a stable foundation.
 
--   **Story 2.2:** As a registered user, I want to log in with my credentials so that I can access my study materials. (MVP)
-    *   **FR/NFRs:** FR-2
-    *   **Acceptance Criteria:**
-        *   A login form allows users to enter email and password.
-        *   Successful login redirects the user to their dashboard.
-        *   Invalid credentials display an appropriate error message.
+**Acceptance Criteria:**
 
--   **Story 2.3:** As an authenticated user, I want to remain logged in between sessions so that I don't have to enter my credentials every time I visit. (MVP)
-    *   **FR/NFRs:** FR-3
-    *   **Acceptance Criteria:**
-        *   User sessions persist across browser sessions (e.g., using secure tokens).
-        *   The user is automatically logged in upon returning to the application within the session duration.
+**Given** a new project environment,
+**When** the project setup is completed,
+**Then** a Next.js frontend and FastAPI backend are scaffolded.
+**And** basic routing and dependency management are configured.
+**And** a local development environment is operational.
 
--   **Story 2.4:** As a logged-in user, I want to log out from a profile menu so that I can securely end my session. (MVP)
-    *   **FR/NFRs:** FR-2
-    *   **Acceptance Criteria:**
-        *   A logout option is available in the user's profile or navigation menu.
-        *   Clicking logout invalidates the current session and clears user authentication tokens.
-        *   User is redirected to the login/landing page after logging out.
+**Prerequisites:** None
 
--   **Story 2.5:** As a user, I want to see clear error messages if my login or sign-up fails (e.g., "Invalid password") so that I can correct my input. (MVP)
-    *   **FR/NFRs:** Implicitly supports FR-1, FR-2
-    *   **Acceptance Criteria:**
-        *   Specific error messages are displayed for common login/signup failures (e.g., "Email already registered," "Incorrect password," "Invalid email format").
-        *   Error messages are user-friendly and actionable.
+**Technical Notes:** Set up Next.js (TypeScript) and FastAPI (Python) projects, configure `package.json`, `requirements.txt`, basic `tsconfig.json`, `tailwind.config.js`. Implement a simple "Hello World" endpoint and corresponding frontend page.
 
----
+### Story 1.2: User Registration
 
-## Epic 3: Course and Note Management (MVP)
+As a new user,
+I want to create an account,
+So that I can access the AI Study Buddy features.
 
-This epic covers the creation, organization, and manipulation of courses and lecture notes.
+**Acceptance Criteria:**
 
-### User Stories
+**Given** I am on the registration page,
+**When** I provide a unique email and password and submit,
+**Then** my account is created securely.
+**And** I am automatically logged in.
+**And** I receive a confirmation message.
 
--   **Story 3.1:** As a student, I want to see a "Create New Course" button on my dashboard so that I can easily start organizing my materials. (MVP)
-    *   **FR/NFRs:** FR-4, FR-6
-    *   **Acceptance Criteria:**
-        *   A clearly visible "Create New Course" button exists on the user dashboard.
-        *   Clicking the button initiates the course creation workflow.
+**Prerequisites:** Story 1.1
 
--   **Story 3.2:** As a student, I want to create a new course with a title and an optional description so that I can group my notes by subject. (MVP)
-    *   **FR/NFRs:** FR-4
-    *   **Acceptance Criteria:**
-        *   A form allows input for course title (required) and description (optional).
-        *   Successfully created courses appear in the user's course list.
-        *   Course titles must be unique for a given user.
+**Covers:** FR-1
 
--   **Story 3.3:** As a student, I want to view a list of all my courses on the dashboard so that I have a clear overview and can navigate easily. (MVP)
-    *   **FR/NFRs:** FR-6
-    *   **Acceptance Criteria:**
-        *   The dashboard displays a scrollable list of all courses created by the user.
-        *   Each course entry shows its title and description (if available).
-        *   Clicking on a course entry navigates to the course-specific page.
+**Technical Notes:** Implement user registration endpoint in FastAPI (Supabase integration for user storage, password hashing). Create registration form in Next.js.
 
--   **Story 3.4:** As a student, I want to edit a course's title and description so that I can keep the information up to date. (MVP)
-    *   **FR/NFRs:** FR-4
-    *   **Acceptance Criteria:**
-        *   An "Edit Course" option is available for each course.
-        *   The edit form pre-populates with current course data.
-        *   Changes to title and description can be saved and are reflected immediately.
+### Story 1.3: User Login and Session Management
 
--   **Story 3.5:** As a student, I want to delete a course (with a confirmation modal) so that I can remove subjects I am no longer studying. (MVP)
-    *   **FR/NFRs:** FR-4
-    *   **Acceptance Criteria:**
-        *   A "Delete Course" option is available.
-        *   Attempting to delete a course triggers a confirmation modal asking for user verification.
-        *   Upon confirmation, the course and all associated notes and quizzes are permanently deleted.
+As a registered user,
+I want to log in and maintain a persistent session,
+So that I can access my study materials across visits without re-authenticating constantly.
 
--   **Story 3.6:** As a student, I want to add a lecture note with a title and content to a specific course so that I can capture my study material. (MVP)
-    *   **FR/NFRs:** FR-5
-    *   **Acceptance Criteria:**
-        *   A "Create New Note" option is available within a course page.
-        *   A form allows input for note title (required) and content (text area).
-        *   Successfully created notes appear in the list for that course.
+**Acceptance Criteria:**
 
--   **Story 3.7:** As a student, I want to view and edit the content of an existing lecture note so that I can make corrections or additions. (MVP)
-    *   **FR/NFRs:** FR-5
-    *   **Acceptance Criteria:**
-        *   Clicking on a note title or an "Edit" option opens the note for viewing/editing.
-        *   The note editor displays current title and content.
-        *   Changes to note title or content can be saved and are reflected immediately.
+**Given** I am on the login page,
+**When** I provide my registered email and password and submit,
+**Then** I am successfully logged in.
+**And** a secure token-based session is established.
+**And** my session persists automatically on subsequent visits until I explicitly log out.
+**Given** I am logged in,
+**When** I close and reopen the browser,
+**Then** I am automatically logged into my account.
 
--   **Story 3.8:** As a student, I want to delete a lecture note (with confirmation) so that I can remove irrelevant information. (MVP)
-    *   **FR/NFRs:** FR-5
-    *   **Acceptance Criteria:**
-        *   A "Delete Note" option is available for each note.
-        *   A confirmation modal appears before permanent deletion.
-        *   Upon confirmation, the note and any associated quizzes are permanently deleted.
+**Prerequisites:** Story 1.1, Story 1.2
+
+**Covers:** FR-1
+
+**Technical Notes:** Implement login endpoint in FastAPI (token generation, validation). Integrate with Next.js for secure cookie/local storage of tokens and session rehydration.
+
+### Story 1.4: User Logout
+
+As a logged-in user,
+I want to securely log out of my account,
+So that my session is terminated and my data is protected.
+
+**Acceptance Criteria:**
+
+**Given** I am logged in,
+**When** I click the "Logout" button,
+**Then** my session is terminated on the server.
+**And** my authentication token is cleared from the client.
+**And** I am redirected to the login page.
+
+**Prerequisites:** Story 1.3
+
+**Covers:** FR-1
+
+**Technical Notes:** Implement logout endpoint in FastAPI (token invalidation). Update Next.js client to clear token and redirect.
 
 ---
 
-## Epic 4: AI-Powered Quiz Generation (MVP)
+## Epic 2: Course & Note Management
 
-This epic focuses on the core AI functionality of generating, displaying, and managing quizzes.
+**Goal:** Enable users to effectively create, organize, and manage their study materials through courses and lecture notes.
 
-### User Stories
+### Story 2.1: Create Course
 
--   **Story 4.1:** As a student, I want to trigger a quiz generation from a single lecture note so that I can test my knowledge on that specific topic. (MVP)
-    *   **FR/NFRs:** FR-8
-    *   **Acceptance Criteria:**
-        *   A "Generate Quiz" button is available on each individual lecture note page.
-        *   Clicking the button initiates the quiz generation process for that note.
+As a logged-in user,
+I want to create a new course with a title and an optional description,
+So that I can organize my study materials.
 
--   **Story 4.2:** As a student, I want the ability to generate a single quiz from all lecture notes within a course so that I can have a comprehensive review of the subject. (MVP)
-    *   **FR/NFRs:** FR-9
-    *   **Acceptance Criteria:**
-        *   A "Generate Course Quiz" button is available on the course page.
-        *   Clicking the button initiates quiz generation using all notes within that course.
+**Acceptance Criteria:**
 
--   **Story 4.3:** As a student, I want the "Generate Course Quiz" button to be disabled if there are fewer than two notes, so that I understand why I can't generate a quiz yet. (MVP)
-    *   **FR/NFRs:** Implies FR-9
-    *   **Acceptance Criteria:**
-        *   The "Generate Course Quiz" button is visibly disabled if the course contains less than two notes.
-        *   A tooltip or message explains the reason for disability (e.g., "Requires at least two notes").
+**Given** I am logged in,
+**When** I provide a course title and an optional description,
+**Then** a new course is created and associated with my account.
+**And** the new course appears on my dashboard.
 
--   **Story 4.4:** As a student, I want to see a loading indicator while a quiz is being generated so that I have feedback that the system is working. (MVP)
-    *   **FR/NFRs:** FR-10
-    *   **Acceptance Criteria:**
-        *   A visible loading indicator (spinner, progress bar) appears during quiz generation.
-        *   The loading indicator disappears upon completion or error.
+**Prerequisites:** Story 1.3
 
--   **Story 4.5:** As a student, I want to view a generated quiz in a clean, readable format with multiple-choice questions and a separate answer key at the bottom. (MVP)
-    *   **FR/NFRs:** FR-12, FR-13, FR-14, FR-15
-    *   **Acceptance Criteria:**
-        *   Generated quizzes are displayed in a structured markdown format.
-        *   Lecture quizzes contain exactly 10 questions and course quizzes exactly 20 questions.
-        *   Each question has four answer options, only one correct.
-        *   A "Correct Answers" section is clearly displayed at the end of the quiz.
+**Covers:** FR-2
 
--   **Story 4.6:** As a student, I want to be prompted to replace an existing quiz if I try to generate a new one for the same note, so I don't lose work accidentally. (MVP)
-    *   **FR/NFRs:** FR-11
-    *   **Acceptance Criteria:**
-        *   If a quiz already exists for a note/course, a confirmation modal appears when generating a new one.
-        *   The modal offers options to "Replace" or "Cancel."
+**Technical Notes:** Implement FastAPI endpoint for course creation. Create a form in Next.js for users to input course details.
 
--   **Story 4.7:** As a student, I want to copy the full content of a quiz to my clipboard so that I can easily use it in other applications or print it. (MVP)
-    *   **FR/NFRs:** FR-16
-    *   **Acceptance Criteria:**
-        *   A "Copy Quiz" button or similar function is available on the quiz view page.
-        *   Clicking the button copies the entire quiz text (questions and answers) to the clipboard.
-        *   A success message (e.g., "Copied to clipboard!") is displayed.
+### Story 2.2: View All Courses (Dashboard)
 
--   **Story 4.8:** As a student, I want the option to delete a generated quiz so that I can keep my workspace clean. (MVP)
-    *   **FR/NFRs:** FR-17
-    *   **Acceptance Criteria:**
-        *   A "Delete Quiz" option is available on the quiz view page or list view.
-        *   A confirmation modal appears before permanent deletion.
-        *   Upon confirmation, the quiz is permanently removed.
+As a logged-in user,
+I want to see all my created courses,
+So that I can easily navigate to my study materials.
+
+**Acceptance Criteria:**
+
+**Given** I am logged in,
+**When** I access my dashboard,
+**Then** a list of all my courses is displayed, showing at least the title of each course.
+
+**Prerequisites:** Story 2.1
+
+**Covers:** FR-3
+
+**Technical Notes:** Implement FastAPI endpoint to retrieve all courses for a user. Develop a dashboard component in Next.js to display the list of courses.
+
+### Story 2.3: View Notes Within a Course
+
+As a logged-in user,
+I want to see all lecture notes associated with a specific course,
+So that I can manage and access the content for that course.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a specific course page,
+**When** I access that course,
+**Then** a list of all lecture notes belonging to that course is displayed.
+
+**Prerequisites:** Story 2.1
+
+**Covers:** FR-3
+
+**Technical Notes:** Implement FastAPI endpoint to retrieve notes for a given course ID. Develop a course detail page in Next.js to display the notes.
+
+### Story 2.4: Create Lecture Note
+
+As a logged-in user,
+I want to create a new lecture note with a title and text content within an existing course,
+So that I can add my study material.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a specific course page,
+**When** I provide a note title and text content,
+**Then** a new lecture note is created and associated with that course.
+**And** the new note appears in the list of notes for that course.
+
+**Prerequisites:** Story 2.3
+
+**Covers:** FR-2
+
+**Technical Notes:** Implement FastAPI endpoint for lecture note creation (associated with a course). Create a form in Next.js for users to input note details.
+
+### Story 2.5: Edit Course Details
+
+As a logged-in user,
+I want to update the title or description of an existing course,
+So that I can keep my course organization current.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a course,
+**When** I edit its title or description and save,
+**Then** the course details are updated.
+**And** the changes are reflected on the dashboard and course page.
+
+**Prerequisites:** Story 2.2
+
+**Covers:** FR-2
+
+**Technical Notes:** Implement FastAPI endpoint for updating course details. Create an edit functionality in Next.js.
+
+### Story 2.6: Edit Lecture Note Details
+
+As a logged-in user,
+I want to update the title or text content of an existing lecture note,
+So that I can refine my study materials.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a lecture note within a course,
+**When** I edit its title or text content and save,
+**Then** the lecture note details are updated.
+**And** the changes are reflected on the course page.
+
+**Prerequisites:** Story 2.4
+
+**Covers:** FR-2
+
+**Technical Notes:** Implement FastAPI endpoint for updating lecture note details. Create an edit functionality in Next.js.
+
+### Story 2.7: Delete Course
+
+As a logged-in user,
+I want to delete an entire course,
+So that I can remove outdated or irrelevant study materials.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a course,
+**When** I initiate a delete action and confirm,
+**Then** the course and all its associated lecture notes and quizzes are permanently removed from my account.
+**And** the course no longer appears on my dashboard.
+
+**Prerequisites:** Story 2.2
+
+**Covers:** FR-2
+
+**Technical Notes:** Implement FastAPI endpoint for deleting a course (with cascading delete for notes and quizzes). Implement delete functionality in Next.js with a confirmation step.
+
+### Story 2.8: Delete Lecture Note
+
+As a logged-in user,
+I want to delete a specific lecture note,
+So that I can remove individual outdated or irrelevant pieces of study material.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a lecture note within a course,
+**When** I initiate a delete action and confirm,
+**Then** the lecture note and any quizzes generated directly from it are permanently removed.
+**And** the note no longer appears in the course's note list.
+
+**Prerequisites:** Story 2.4
+
+**Covers:** FR-2
+
+**Technical Notes:** Implement FastAPI endpoint for deleting a lecture note. Implement delete functionality in Next.js with a confirmation step.
 
 ---
 
-## Epic 5: Quiz Interaction & Presentation (MVP/Growth)
+## Epic 3: Quiz Generation & Basic Listing
 
-This epic provides the user-facing functionality for viewing, using, and managing the generated quizzes in a clean and structured format.
+**Goal:** Deliver the core functionality allowing users to generate AI-powered multiple-choice quizzes and access them easily.
 
-### User Stories
+### Story 3.1: Generate Quiz from Single Lecture Note
 
--   **Story 5.1:** As a student, I want to access a list of all my previously generated quizzes, so that I can easily find and retake them. (MVP)
-    *   **FR/NFRs:** FR-12a
-    *   **Acceptance Criteria:**
-        *   A dedicated section or page lists all quizzes generated by the user.
-        *   Each entry in the list clearly identifies the quiz (e.g., by source note/course and generation date).
-        *   Clicking a quiz in the list navigates to its view/interaction page.
+As a logged-in user,
+I want to generate a 10-question multiple-choice quiz from a single lecture note,
+So that I can test my knowledge on specific content.
 
--   **Story 5.2:** As a student, I want to view a generated quiz in a dedicated quiz-taking interface, so that I can attempt the questions interactively. (Growth)
-    *   **FR/NFRs:** FR-18
-    *   **Acceptance Criteria:**
-        *   Quizzes can be opened in an interactive interface, distinct from the static markdown view.
-        *   The interface presents one question at a time or allows easy navigation between questions.
+**Acceptance Criteria:**
 
--   **Story 5.3:** As a student, I want to select an answer for each multiple-choice question within the quiz interface, so that I can test my knowledge. (Growth)
-    *   **FR/NFRs:** FR-19
-    *   **Acceptance Criteria:**
-        *   Each question in the interactive interface allows selection of one of the four options.
-        *   The selected answer is clearly indicated.
+**Given** I am viewing a lecture note,
+**When** I initiate quiz generation,
+**Then** a loading indicator is displayed.
+**And** a 10-question multiple-choice quiz is generated by the AI from the note's content.
+**And** the generated quiz is saved and associated with the note.
+**And** I am presented with the quiz for review.
 
--   **Story 5.4:** As a student, I want to submit my answers and receive immediate feedback on whether my answers are correct or incorrect, so that I can learn from my mistakes. (Growth)
-    *   **FR/NFRs:** FR-20
-    *   **Acceptance Criteria:**
-        *   Upon submitting an answer (per question or at end), immediate visual feedback is provided (e.g., green for correct, red for incorrect).
-        *   The correct answer is clearly indicated for incorrect responses.
+**Prerequisites:** Story 2.4
 
--   **Story 5.5:** As a student, I want to see a summary of my quiz results (e.g., score, number of correct/incorrect answers) after completing a quiz, so that I can track my progress. (Growth)
-    *   **FR/NFRs:** FR-21
-    *   **Acceptance Criteria:**
-        *   After completing an interactive quiz, a summary screen displays the user's score.
-        *   The summary includes the number of correct, incorrect, and unanswered questions.
+**Covers:** FR-4
 
--   **Story 5.6:** As a student, I want to have the option to review the correct answers for a quiz after completing it, so that I can reinforce my learning. (Growth)
-    *   **FR/NFRs:** Implies FR-15
-    *   **Acceptance Criteria:**
-        *   A "Review Answers" option is available on the quiz results summary.
-        *   The review mode clearly shows each question, the user's answer, and the correct answer.
+**Technical Notes:** Implement FastAPI endpoint to send note content to Gemini 2.5 Pro API for quiz generation, receive and parse response, save quiz to database. Create UI in Next.js to trigger generation and display loading state.
 
--   **Story 5.7:** As a student, I want to mark a quiz as "completed" or "mastered" so that I can keep track of my study progress. (Growth)
-    *   **FR/NFRs:** Implies FR-21
-    *   **Acceptance Criteria:**
-        *   Users can mark quizzes with a status (e.g., "Completed," "Mastered," "Needs Review").
-        *   The status is visible in the quiz list or on the quiz detail page.
+### Story 3.2: Generate Quiz from All Notes in a Course
+
+As a logged-in user,
+I want to generate a 20-question multiple-choice quiz from all notes within a course (if ≥ 2 notes),
+So that I can review a broader range of material for that course.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a course with at least two lecture notes,
+**When** I initiate quiz generation for the course,
+**Then** a loading indicator is displayed.
+**And** a 20-question multiple-choice quiz is generated by the AI from the combined content of all course notes.
+**And** the generated quiz is saved and associated with the course.
+**And** I am presented with the quiz for review.
+
+**Prerequisites:** Story 2.3, Story 2.4
+
+**Covers:** FR-4
+
+**Technical Notes:** Implement FastAPI endpoint to combine note content from a course, send to Gemini 2.5 Pro API for quiz generation, receive and parse response, save quiz to database. Create UI in Next.js to trigger generation and display loading state.
+
+### Story 3.3: Confirmation Before Overwriting Existing Quiz
+
+As a user,
+I want to be prompted for confirmation before overwriting an existing quiz,
+So that I do not accidentally lose a previously generated quiz.
+
+**Acceptance Criteria:**
+
+**Given** an existing quiz is associated with a note or course,
+**When** I attempt to generate a new quiz for that same note or course,
+**Then** a confirmation dialog appears asking if I want to overwrite the existing quiz.
+**And** if I confirm, the new quiz replaces the old one.
+**And** if I cancel, the existing quiz remains.
+
+**Prerequisites:** Story 3.1, Story 3.2
+
+**Covers:** FR-4
+
+**Technical Notes:** Implement logic in FastAPI to check for existing quizzes and return a flag. Next.js UI displays a confirmation modal based on this flag.
+
+### Story 3.4: Display Generated Quiz Content
+
+As a logged-in user,
+I want to view my generated quizzes in a clean, structured format,
+So that I can easily read and use them for study.
+
+**Acceptance Criteria:**
+
+**Given** I have generated a quiz,
+**When** I view the quiz,
+**Then** each question is displayed with four options, one of which is marked as correct.
+**And** a "Correct Answers" section clearly lists the correct option for each question.
+
+**Prerequisites:** Story 3.1, Story 3.2
+
+**Covers:** FR-5
+
+**Technical Notes:** Develop a display component in Next.js to render the quiz data (questions, options, correct answer) from the FastAPI endpoint.
+
+### Story 3.5: Copy Quiz Content
+
+As a logged-in user,
+I want to copy the entire content of a generated quiz,
+So that I can easily share or use it in other applications.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a generated quiz,
+**When** I click a "Copy Quiz" button,
+**Then** the entire quiz content (questions, options, and correct answers section) is copied to my clipboard.
+**And** a confirmation message indicates the content has been copied.
+
+**Prerequisites:** Story 3.4
+
+**Covers:** FR-5
+
+**Technical Notes:** Implement client-side JavaScript functionality in Next.js to copy the rendered quiz content to the clipboard.
+
+### Story 3.6: Delete Quiz
+
+As a logged-in user,
+I want to delete a previously generated quiz,
+So that I can remove outdated or unwanted study materials.
+
+**Acceptance Criteria:**
+
+**Given** I am viewing a quiz or a list of quizzes,
+**When** I initiate a delete action for a specific quiz and confirm,
+**Then** the quiz is permanently removed from my account.
+
+**Prerequisites:** Story 3.4
+
+**Covers:** FR-5
+
+**Technical Notes:** Implement FastAPI endpoint for deleting a quiz. Implement delete functionality in Next.js with a confirmation step.
+
+### Story 3.7: View List of All Quizzes
+
+As a logged-in user,
+I want to view a simple, single list of all my generated quizzes,
+So that I can easily find and manage them.
+
+**Acceptance Criteria:**
+
+**Given** I am logged in,
+**When** I navigate to the "My Quizzes" section (or equivalent),
+**Then** a list of all quizzes I have generated is displayed, showing at least the title or source note/course.
+
+**Prerequisites:** Story 3.1, Story 3.2, Story 3.6
+
+**Covers:** FR-6
+
+**Technical Notes:** Implement FastAPI endpoint to retrieve all quizzes for a user. Develop a dedicated page or component in Next.js to display this list.
 
 ---
 
-## Epic 6: Accessibility Compliance (MVP)
+## Epic 4: Enhanced Quiz Interaction (Growth Feature)
 
-This epic ensures the application is usable, intuitive, and accessible to all users across different devices.
+**Goal:** Elevate the quiz experience by providing an interactive interface with immediate feedback and progress tracking.
 
-### User Stories
+### Story 4.1: Dedicated Quiz-Taking Interface
 
--   **Story 6.1:** As a user, I want the application to be fully responsive so that I can have a seamless experience on both my desktop and mobile devices. (MVP)
-    *   **FR/NFRs:** NFR-7
-    *   **Acceptance Criteria:**
-        *   The UI adapts correctly to various screen sizes (desktop, tablet, mobile).
-        *   All elements are visible and interactive on different devices without horizontal scrolling.
+As a logged-in user,
+I want to access a dedicated interface for taking quizzes,
+So that I can focus on answering questions without distractions.
 
--   **Story 6.2:** As a user with visual impairments, I want to be able to navigate and use the entire application with a screen reader (e.g., VoiceOver) so that I can access all features. (MVP)
-    *   **FR/NFRs:** NFR-10
-    *   **Acceptance Criteria:**
-        *   All UI elements have appropriate ARIA labels and roles.
-        *   Content is logically structured for screen reader interpretation.
-        *   Major workflows (e.g., creating notes, generating quizzes) are fully operable via screen reader.
+**Acceptance Criteria:**
 
--   **Story 6.3:** As a keyboard user, I want all interactive elements (buttons, links, inputs) to have a visible focus state so that I always know where I am on the page. (MVP)
-    *   **FR/NFRs:** NFR-9
-    *   **Acceptance Criteria:**
-        *   All interactive elements display a clear visual focus indicator when tab-navigated.
-        *   Keyboard focus moves logically through the page content.
+**Given** I am viewing a generated quiz,
+**When** I choose to "Start Quiz" (or equivalent),
+**Then** a clean, focused interface displays one question at a time.
+**And** navigation controls (e.g., "Next Question", "Previous Question") are available.
 
--   **Story 6.4:** As a user, I want to interact with a clean, minimalist UI so that I can focus on my studies without distraction. (MVP)
-    *   **FR/NFRs:** NFR-8 (partially, by contributing to usability)
-    *   **Acceptance Criteria:**
-        *   The design adheres to minimalist principles, reducing visual clutter.
-        *   No intrusive ads or unnecessary animations are present.
+**Prerequisites:** Story 3.4
 
--   **Story 6.5:** As a user, I want to see the dashboard automatically refresh after I create new content (like a course or note) so that my view is always up-to-date. (MVP)
-    *   **FR/NFRs:** Implies a smooth user experience as per NFR-1, NFR-2
-    *   **Acceptance Criteria:**
-        *   Upon successful creation of a course or note, the relevant list (dashboard, course page) updates without requiring a manual page refresh.
+**Covers:** FR-7
 
--   **Story 6.6:** As a user, I want the UI to have a consistent and logical layout (e.g., navigation, headings) so that I can easily find my way around the application. (MVP)
-    *   **FR/NFRs:** Implies NFR-8 (usability aspect)
-    *   **Acceptance Criteria:**
-        *   Navigation menus, headers, footers, and content areas maintain consistent positioning and styling across the application.
-        *   Heading structures (H1, H2, etc.) are used semantically and consistently.
+**Technical Notes:** Develop a new Next.js route/component for interactive quiz taking. Implement state management for current question, user's answer, and navigation.
 
+### Story 4.2: Submit Answers and Receive Immediate Feedback
+
+As a logged-in user taking a quiz,
+I want to submit my answer for each question and receive immediate feedback,
+So that I can learn from my mistakes in real-time.
+
+**Acceptance Criteria:**
+
+**Given** I am on a question in the quiz-taking interface,
+**When** I select an answer option and submit,
+**Then** the interface indicates whether my answer was correct or incorrect.
+**And** the correct answer is highlighted.
+**And** I cannot change my answer after submission for that question.
+
+**Prerequisites:** Story 4.1
+
+**Covers:** FR-7
+
+**Technical Notes:** Implement client-side logic in Next.js to compare selected answer with the correct answer. Display visual feedback. Store user's selected answer and correctness.
+
+### Story 4.3: Track Quiz Progress
+
+As a logged-in user taking a quiz,
+I want to see my progress through the quiz,
+So that I know how many questions I have completed and how many are remaining.
+
+**Acceptance Criteria:**
+
+**Given** I am in the quiz-taking interface,
+**When** I answer questions,
+**Then** a progress indicator (e.g., "Question X of Y") or progress bar updates accordingly.
+
+**Prerequisites:** Story 4.1
+
+**Covers:** FR-7
+
+**Technical Notes:** Implement state tracking in Next.js for current question index and total questions. Display this information in the UI.
+
+### Story 4.4: View Quiz Score at Completion
+
+As a logged-in user,
+I want to see my final score and performance summary after completing a quiz,
+So that I can evaluate my understanding of the material.
+
+**Acceptance Criteria:**
+
+**Given** I have answered all questions in a quiz,
+**When** I complete the quiz (e.g., by clicking a "Finish Quiz" button),
+**Then** my total score (e.g., X out of Y correct) is displayed.
+**And** a summary of my performance (e.g., number of correct/incorrect answers) is presented.
+**And** the score is saved with the quiz history.
+
+**Prerequisites:** Story 4.2, Story 4.3
+
+**Covers:** FR-7
+
+**Technical Notes:** Implement logic in Next.js to calculate final score based on stored correctness. Display results. Implement FastAPI endpoint to save quiz attempt results to the database.
+
+---
+
+## Epic 5: Non-Functional Requirements & System Polish
+
+**Goal:** Ensure the AI Study Buddy meets crucial non-functional standards for performance, comprehensive security, scalability, full responsiveness, and accessibility.
+
+### Story 5.1: API Performance Optimization
+
+As a user,
+I want core actions (e.g., note creation, quiz generation) to be fast and responsive,
+So that I don't experience frustrating wait times and my study flow is uninterrupted.
+
+**Acceptance Criteria:**
+
+**Given** typical user load,
+**When** performing core API actions (e.g., POST /notes, POST /quizzes),
+**Then** API response times are consistently below 500ms (NFR-1).
+**And** loading indicators are present for longer operations.
+
+**Prerequisites:** All API endpoints for core features (Epics 1, 2, 3)
+
+**Covers:** NFR-1
+
+**Technical Notes:** Implement database indexing, optimize API queries, introduce caching where appropriate, use FastAPI's asynchronous features. Monitor performance with tools.
+
+### Story 5.2: Comprehensive Data Security (Encryption & Authorization)
+
+As a user,
+I want my personal information and study notes to be fully secure and private,
+So that I trust the application with my data.
+
+**Acceptance Criteria:**
+
+**Given** any data transmission,
+**When** data is sent between client and server,
+**Then** it is encrypted using TLS (NFR-2).
+**Given** sensitive user data stored in the database,
+**When** accessing it,
+**Then** it is encrypted at rest.
+**And** strict authorization rules prevent unauthorized access to any user's data (NFR-2).
+
+**Prerequisites:** Story 1.3 (authentication), all CRUD operations for user data.
+
+**Covers:** NFR-2
+
+**Technical Notes:** Enforce HTTPS, configure database encryption (Supabase provides this), implement row-level security (RLS) policies in Supabase, ensure all API endpoints have robust authorization checks.
+
+### Story 5.3: Scalable Backend Architecture
+
+As a growing user base,
+I want the application to remain performant and available,
+So that new users can join and existing users can continue to study effectively.
+
+**Acceptance Criteria:**
+
+**Given** an increase in user load and data volume,
+**When** the application is used by a larger number of concurrent users,
+**Then** the backend scales efficiently to maintain performance (NFR-3).
+**And** no significant performance degradation is observed up to X concurrent users (define X based on initial target).
+
+**Prerequisites:** All backend features (Epics 1, 2, 3)
+
+**Covers:** NFR-3
+
+**Technical Notes:** Design FastAPI application for statelessness. Consider deployment on platforms with auto-scaling capabilities (e.g., cloud functions, container orchestration). Optimize database schema and queries.
+
+### Story 5.4: Full Responsiveness Across Devices
+
+As a user,
+I want to use the AI Study Buddy on any device,
+So that I can study conveniently whether I'm on my desktop, tablet, or mobile phone.
+
+**Acceptance Criteria:**
+
+**Given** the application is accessed on various screen sizes (desktop, tablet, mobile),
+**When** interacting with any part of the UI,
+**Then** all elements are appropriately sized and positioned, providing an optimal user experience without horizontal scrolling (NFR-4).
+**And** all interactive elements are easily tappable/clickable.
+
+**Prerequisites:** All frontend UI features
+
+**Covers:** NFR-4
+
+**Technical Notes:** Implement a mobile-first responsive design strategy using Tailwind CSS. Test across a range of device emulators and actual devices.
+
+### Story 5.5: WCAG 2.1 Level AA Accessibility Compliance
+
+As a user with diverse needs (e.g., using a screen reader or keyboard-only navigation),
+I want to fully access and interact with the application,
+So that I can study effectively like any other user.
+
+**Acceptance Criteria:**
+
+**Given** any interactive UI element,
+**When** navigating with a keyboard,
+**Then** all elements are reachable and operable.
+**And** clear focus indicators are visible (NFR-5).
+**Given** a screen reader is active,
+**When** navigating through the application,
+**Then** all content and interactive elements are correctly announced and understandable (NFR-5).
+**And** the application adheres to WCAG 2.1 Level AA guidelines.
+
+**Prerequisites:** All frontend UI features
+
+**Covers:** NFR-5
+
+**Technical Notes:** Use semantic HTML. Implement ARIA attributes where necessary. Ensure sufficient color contrast. Conduct regular accessibility audits with tools like Lighthouse and screen readers.
+
+---
+
+_For implementation: Use the `create-story` workflow to generate individual story implementation plans from this epic breakdown._
+The `docs/epics.md` file has been created and populated with the epic and story breakdown for the AI Study Buddy project.
+
+This document serves as the implementation breakdown derived from the PRD, ready for subsequent architecture and development phases.

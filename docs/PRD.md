@@ -9,10 +9,10 @@
 ## Executive Summary
 
 AI Study Buddy is a minimalist, AI-powered web application designed to help students improve their study efficiency by generating multiple-choice quizzes from their own notes. By automating the time-consuming process of creating study materials, the application provides a structured and distraction-free environment for effective learning.
-
 ### What Makes This Special
 
 By automating the time-consuming process of creating study materials, the application provides a structured and distraction-free environment for effective learning.
+
 
 ---
 
@@ -26,24 +26,24 @@ This project is a Medium-complexity Web Application (SPA) in the Education Techn
 
 ### Domain Context
 
-The application operates within the Education Technology (EdTech) space, specifically targeting self-directed learning and study efficiency. The core pedagogical principle is **active recall**, facilitated by auto-generated quizzes. The context is defined by a minimalist, distraction-free environment, contrasting with feature-heavy educational tools. The primary goal is to automate the tedious task of creating study materials, allowing students to focus on structured and consistent review.
+Operating within EdTech, the application targets self-directed learning and study efficiency through **active recall** via auto-generated quizzes. It provides a minimalist, distraction-free environment, automating study material creation to facilitate structured and consistent review.
 
 
 ---
 
 ## Success Criteria
 
-Success for the AI Study Buddy means:
-- **Core functionality is flawless:** Users can seamlessly create accounts, manage their notes, and generate relevant, high-quality quizzes without issues.
-- **It just works:** Data persists reliably across sessions, and the application is fully responsive on both desktop and mobile.
-- **It's accessible to everyone:** The application is fully usable with screen readers, meeting our accessibility goals from day one.
-- **Users are engaged:** We see users not just trying the app, but creating multiple notes and generating quizzes, indicating they find real value in the core loop.
+Success for the AI Study Buddy is defined by:
+- **Flawless Core Functionality:** Seamless user accounts, note management, and high-quality quiz generation.
+- **Reliability & Responsiveness:** Persistent data, full responsiveness across devices.
+- **Universal Accessibility:** Full screen reader usability and adherence to accessibility goals.
+- **User Engagement:** High user retention and consistent creation of notes and quizzes, demonstrating perceived value.
 
 ### Business Metrics
 
-- **Weekly Active Users (WAU):** How many unique users engage with the app each week?
-- **Core Feature Adoption:** What percentage of users generate at least one quiz within their first week?
-- **User Retention:** What percentage of users return to the app a week after signing up?
+- **Weekly Active Users (WAU):** Unique users engaging weekly.
+- **Core Feature Adoption:** Percentage of users generating at least one quiz in their first week.
+- **User Retention:** Percentage of users returning a week after signup.
 
 ---
 
@@ -110,56 +110,34 @@ The frontend, built with Next.js, will be a responsive web application accessibl
 ## Functional Requirements
 
 ### User Account Management
-- **FR-1:** Users must be able to create a new account using an email and password. (MVP)
-- **FR-2:** Users must be able to log in to their account and log out. (MVP)
-- **FR-3:** The system must persist user sessions, automatically logging them in on return visits. (MVP)
+- **FR-1:** Users must be able to create, log in to, and log out of their accounts, with persistent sessions automatically logging them in on return visits. (MVP)
 
 ### Course & Note Management
-- **FR-4:** Users must be able to create, read, update, and delete courses. Each course must have a title and an optional description. (MVP)
-- **FR-5:** Users must be able to create, read, update, and delete lecture notes within a course. Each note consists of a title and text content. (MVP)
-- **FR-6:** The dashboard must display a list of all user-created courses. (MVP)
-- **FR-7:** The course page must display a list of all lecture notes associated with that course. (MVP)
+- **FR-2:** Users can perform full Create, Read, Update, Delete (CRUD) operations on courses (including a title and optional description) and lecture notes (title and text content) within a course. (MVP)
+- **FR-3:** The dashboard will display all user-created courses, and each course page will list its associated lecture notes. (MVP)
 
-### Quiz Generation
-- **FR-8:** Users must be able to generate a multiple-choice quiz from the content of a single lecture note. (MVP)
-- **FR-9:** Users must be able to generate a single multiple-choice quiz from the combined content of all notes within a course. This function is only enabled if the course contains at least two lecture notes. (MVP)
-- **FR-10:** The system must provide a loading indicator while the AI is generating a quiz. (MVP)
-- **FR-11:** If a quiz already exists for a note or course, the system must ask the user for confirmation before generating a new one to replace it. (MVP)
-
-### Quiz Interaction
-- **FR-12:** Generated quizzes must be displayed in a clean, readable, and structured format (e.g., using markdown). (MVP)
-- **FR-12a:** Users must be able to view a simple, single list of all their generated quizzes. (MVP)
-- **FR-13:** Lecture-level quizzes must contain exactly 10 questions, and course-level quizzes must contain exactly 20 questions. (MVP)
-- **FR-14:** Each quiz question must be presented with four answer options, only one of which is correct. (MVP)
-- **FR-15:** A separate "Correct Answers" section must be displayed at the end of the quiz, clearly listing the correct option for each question. (MVP)
-- **FR-16:** Users must have an option to copy the entire quiz content (questions and answers) to their clipboard. (MVP)
-- **FR-17:** Users must be able to delete a previously generated quiz. (MVP)
-- **FR-18:** Users must be able to interact with a dedicated quiz-taking interface. (Growth)
-- **FR-19:** Users must be able to submit their answers for each question within the quiz-taking interface. (Growth)
-- **FR-20:** The system must provide immediate feedback on whether the submitted answer for each question is correct or incorrect. (Growth)
-- **FR-21:** The system must track and display the user's progress within a quiz (e.g., questions answered, score). (Growth)
+### Quiz Management
+- **FR-4:** Users can generate multiple-choice quizzes from a single lecture note (10 questions) or from all notes within a course (20 questions, enabled if ≥ 2 notes). A loading indicator will be shown during generation, and confirmation will be requested before overwriting existing quizzes. (MVP)
+- **FR-5:** Generated quizzes must be displayed in a clean, structured format, with each question having four options (one correct). A "Correct Answers" section will list the correct option for each question. Users can copy the entire quiz content or delete previously generated quizzes. (MVP)
+- **FR-6:** Users must be able to view a simple, single list of all their generated quizzes. (MVP)
+- **FR-7:** (Growth) Users must be able to interact with a dedicated quiz-taking interface, submit answers, receive immediate feedback on correctness, and track their progress and score within a quiz.
 
 ---
 
 ## Non-Functional Requirements
 
 ### Performance
-- **NFR-1:** The application must maintain responsive performance and a fluid user experience, even when processing large text inputs for quiz generation. (MVP)
-- **NFR-2:** API response times for core user actions (e.g., creating notes, generating quizzes) must be optimized to minimize wait times. (MVP)
+- **NFR-1:** Maintain responsive performance and fluid user experience, optimizing API response times for core actions (e.g., note creation, quiz generation) to minimize wait times. (MVP)
 
 ### Security
-- **NFR-3:** All user data, particularly personal information and note content, must be handled securely and encrypted in transit (TLS) and at rest. (MVP)
-- **NFR-4:** The system must enforce strict authorization, ensuring a user can only access and manage their own data. (MVP)
-- **NFR-5:** User authentication credentials (passwords) must be securely hashed and salted. (MVP)
+- **NFR-2:** Securely handle user data (personal info, notes) with encryption in transit (TLS) and at rest. Enforce strict authorization for data access and manage user credentials with secure hashing and salting. (MVP)
 
 ### Scalability
-- **NFR-6:** The backend architecture must be designed to scale efficiently to handle a growing user base and increasing data volume without degradation in performance. (MVP)
+- **NFR-3:** Design backend architecture for efficient scalability to accommodate growing user base and data volume without performance degradation. (MVP)
 
 ### Accessibility & Usability
-- **NFR-7:** The application must be fully responsive, providing an optimal and consistent user experience on both desktop and mobile web browsers. (MVP)
-- **NFR-8:** The application must comply with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. (MVP)
-- **NFR-9:** All application features must be navigable and operable using only a keyboard. (MVP)
-- **NFR-10:** The application must be compatible with modern screen readers (e.g., VoiceOver, NVDA) to ensure it is usable by visually impaired users. (MVP)
+- **NFR-4:** Ensure full responsiveness for optimal cross-device user experience (desktop/mobile). (MVP)
+- **NFR-5:** Comply with Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards, enabling full keyboard navigation and compatibility with modern screen readers. (MVP)
 
 ---
 
