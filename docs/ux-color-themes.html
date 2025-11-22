@@ -26,17 +26,22 @@
         }
         
         h1 { font-size: 2.5rem; text-align: center; border-bottom: 1px solid #dee2e6; padding-bottom: 1rem; margin-top: 0;}
-        h2 { font-size: 2rem; border-bottom: 1px solid #e9ecef; padding-bottom: 0.5rem;}
-        h3 { font-size: 1.5rem; }
-        h4 { font-size: 1.2rem; }
+        h2 { font-size: 1.8rem; border-bottom: 1px solid #e9ecef; padding-bottom: 0.5rem;}
+        h3 { font-size: 1.2rem; }
+        h4 { font-size: 1.1rem; }
 
         .container {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
+        .theme-showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2rem;
+        }
+
         .theme-section {
-            margin-bottom: 4rem;
             border-radius: 8px;
             padding: 2rem;
             background-color: #fff;
@@ -45,27 +50,27 @@
 
         .theme-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 2rem;
         }
 
         .swatch-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .swatch {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
             padding: 0.5rem;
             color: white;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -114,98 +119,38 @@
         
         /* --- 1. Deep Focus Blue --- */
         .theme-blue.light {
-            --primary: #2563EB;
-            --primary-fg: #FFFFFF;
-            --secondary: #475569;
-            --secondary-fg: #FFFFFF;
-            --background: #F8FAFC;
-            --foreground: #020617;
-            --card: #FFFFFF;
-            --card-foreground: #020617;
-            --border: #E2E8F0;
-            --input: #E2E8F0;
-            --ring: #93C5FD;
-            --success: #16A34A;
-            --error: #DC2626;
+            --primary: #2563EB; --primary-fg: #FFFFFF; --secondary: #475569; --secondary-fg: #FFFFFF;
+            --background: #F8FAFC; --foreground: #020617; --card: #FFFFFF; --card-foreground: #020617;
+            --border: #E2E8F0; --input: #E2E8F0; --ring: #93C5FD; --success: #16A34A; --error: #DC2626;
         }
         .theme-blue.dark {
-            --primary: #3B82F6;
-            --primary-fg: #FFFFFF;
-            --secondary: #94A3B8;
-            --secondary-fg: #0F172A;
-            --background: #020617;
-            --foreground: #F8FAFC;
-            --card: #0F172A;
-            --card-foreground: #F8FAFC;
-            --border: #1E293B;
-            --input: #1E293B;
-            --ring: #2563EB;
-            --success: #22C55E;
-            --error: #F87171;
+            --primary: #3B82F6; --primary-fg: #FFFFFF; --secondary: #94A3B8; --secondary-fg: #0F172A;
+            --background: #020617; --foreground: #F8FAFC; --card: #0F172A; --card-foreground: #F8FAFC;
+            --border: #1E293B; --input: #1E293B; --ring: #2563EB; --success: #22C55E; --error: #F87171;
         }
 
         /* --- 2. Sage Green & Stone --- */
         .theme-green.light {
-            --primary: #4D7C0F;
-            --primary-fg: #FFFFFF;
-            --secondary: #57534E;
-            --secondary-fg: #FFFFFF;
-            --background: #FAFAF9;
-            --foreground: #1C1917;
-            --card: #FFFFFF;
-            --card-foreground: #1C1917;
-            --border: #E7E5E4;
-            --input: #E7E5E4;
-            --ring: #A3E635;
-            --success: #16A34A;
-            --error: #DC2626;
+            --primary: #4D7C0F; --primary-fg: #FFFFFF; --secondary: #57534E; --secondary-fg: #FFFFFF;
+            --background: #FAFAF9; --foreground: #1C1917; --card: #FFFFFF; --card-foreground: #1C1917;
+            --border: #E7E5E4; --input: #E7E5E4; --ring: #A3E635; --success: #16A34A; --error: #DC2626;
         }
         .theme-green.dark {
-            --primary: #A3E635;
-            --primary-fg: #1C1917;
-            --secondary: #A8A29E;
-            --secondary-fg: #1C1917;
-            --background: #1C1917;
-            --foreground: #FAFAF9;
-            --card: #292524;
-            --card-foreground: #FAFAF9;
-            --border: #44403C;
-            --input: #44403C;
-            --ring: #4D7C0F;
-            --success: #22C55E;
-            --error: #F87171;
+            --primary: #A3E635; --primary-fg: #1C1917; --secondary: #A8A29E; --secondary-fg: #1C1917;
+            --background: #1C1917; --foreground: #FAFAF9; --card: #292524; --card-foreground: #FAFAF9;
+            --border: #44403C; --input: #44403C; --ring: #4D7C0F; --success: #22C55E; --error: #F87171;
         }
 
         /* --- 3. Warm Taupe --- */
         .theme-taupe.light {
-            --primary: #A16207;
-            --primary-fg: #FFFFFF;
-            --secondary: #57534E;
-            --secondary-fg: #FFFFFF;
-            --background: #FEFCE8;
-            --foreground: #1C1917;
-            --card: #FFFFFF;
-            --card-foreground: #1C1917;
-            --border: #E7E5E4;
-            --input: #E7E5E4;
-            --ring: #FBBF24;
-            --success: #16A34A;
-            --error: #DC2626;
+            --primary: #A16207; --primary-fg: #FFFFFF; --secondary: #57534E; --secondary-fg: #FFFFFF;
+            --background: #FEFCE8; --foreground: #1C1917; --card: #FFFFFF; --card-foreground: #1C1917;
+            --border: #E7E5E4; --input: #E7E5E4; --ring: #FBBF24; --success: #16A34A; --error: #DC2626;
         }
         .theme-taupe.dark {
-            --primary: #FBBF24;
-            --primary-fg: #1C1917;
-            --secondary: #A8A29E;
-            --secondary-fg: #1C1917;
-            --background: #1C1917;
-            --foreground: #FEFCE8;
-            --card: #292524;
-            --card-foreground: #FEFCE8;
-            --border: #44403C;
-            --input: #44403C;
-            --ring: #A16207;
-            --success: #22C55E;
-            --error: #F87171;
+            --primary: #FBBF24; --primary-fg: #1C1917; --secondary: #A8A29E; --secondary-fg: #1C1917;
+            --background: #1C1917; --foreground: #FEFCE8; --card: #292524; --card-foreground: #FEFCE8;
+            --border: #44403C; --input: #44403C; --ring: #A16207; --success: #22C55E; --error: #F87171;
         }
 
         /* Apply Theme to component showcase */
@@ -217,199 +162,132 @@
         .themed .button.primary { background-color: var(--primary); color: var(--primary-fg); }
         .themed .button.secondary { background-color: var(--secondary); color: var(--secondary-fg); }
         .themed .button.destructive { background-color: var(--error); color: var(--primary-fg); }
-
         .themed .input { border-color: var(--input); background-color: var(--card); color: var(--foreground); }
         .themed .input:focus { outline: 2px solid var(--ring); border-color: var(--primary); }
-
         .themed .card { background-color: var(--card); color: var(--card-foreground); border: 1px solid var(--border); }
         .themed .card h4 { color: var(--card-foreground); }
         .themed .card p { opacity: 0.8; }
         
-        .mode-toggle {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .mode-toggle label {
-            margin-right: 0.5rem;
-            font-weight: 500;
-        }
-
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>🎨 AI Study Buddy - Color Theme Visualizer</h1>
-        <p style="text-align: center; max-width: 700px; margin: 0 auto 2rem auto;">
-            Here are three theme directions based on the principle of "calm and not too bright."
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem auto;">
+            Here are three theme directions for side-by-side comparison, based on the principle of "calm and not too bright."
             Each theme is presented in both a <strong>Light Mode</strong> and a <strong>Dark Mode</strong>.
-            Explore the palettes and the component examples to see which one feels best for our "productive, calm, and focused" goal.
         </p>
 
-        <!-- Theme 1: Deep Focus Blue -->
-        <div class="theme-section">
-            <h2>1. Deep Focus Blue</h2>
-            <p>A classic and trustworthy palette. Blue is known to promote calm and focus, making it a safe and professional choice for a study application.</p>
-            <div class="theme-grid">
-                <div>
-                    <h3>Light Mode</h3>
-                    <div class="themed theme-blue light">
-                        <div class="swatch-container">
-                            <div class="swatch" style="background-color: var(--primary); color: var(--primary-fg);"><span class="label">Primary</span><span>#2563EB</span></div>
-                            <div class="swatch" style="background-color: var(--secondary); color: var(--secondary-fg);"><span class="label">Secondary</span><span>#475569</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span><span>#F8FAFC</span></div>
-                            <div class="swatch" style="background-color: var(--foreground);"><span class="label">Text</span><span>#020617</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#16A34A</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#DC2626</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                            <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Chapter 5: Metabolism</h4>
-                                <p>A summary of the key metabolic pathways...</p>
+        <div class="theme-showcase-grid">
+            <!-- Theme 1: Deep Focus Blue -->
+            <div class="theme-section">
+                <h2>1. Deep Focus Blue</h2>
+                <p>A classic, trustworthy palette known to promote calm and focus.</p>
+                <div class="theme-grid">
+                    <div>
+                        <h3>Light Mode</h3>
+                        <div class="themed theme-blue light">
+                            <div class="swatch-container">
+                                <div class="swatch" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h3>Dark Mode</h3>
-                    <div class="themed theme-blue dark">
-                         <div class="swatch-container">
-                            <div class="swatch" style="background-color: var(--primary); color: var(--primary-fg);"><span class="label">Primary</span><span>#3B82F6</span></div>
-                            <div class="swatch" style="background-color: var(--secondary); color: var(--secondary-fg);"><span class="label swatch-light-text">Secondary</span><span>#94A3B8</span></div>
-                            <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span><span>#020617</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--foreground);"><span class="label">Text</span><span>#F8FAFC</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#22C55E</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#F87171</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                            <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Chapter 5: Metabolism</h4>
-                                <p>A summary of the key metabolic pathways...</p>
+                    <div>
+                        <h3>Dark Mode</h3>
+                        <div class="themed theme-blue dark">
+                             <div class="swatch-container">
+                                <div class="swatch" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Theme 2: Sage Green & Stone -->
-        <div class="theme-section">
-            <h2>2. Sage Green & Stone</h2>
-            <p>An organic and natural palette that promotes a sense of peace and tranquility. The green is grounded and serious, while the stone-like neutrals provide a warm, earthy feel.</p>
-            <div class="theme-grid">
-                <div>
-                    <h3>Light Mode</h3>
-                    <div class="themed theme-green light">
-                        <div class="swatch-container">
-                            <div class="swatch" style="background-color: var(--primary); color: var(--primary-fg);"><span class="label">Primary</span><span>#4D7C0F</span></div>
-                            <div class="swatch" style="background-color: var(--secondary); color: var(--secondary-fg);"><span class="label">Secondary</span><span>#57534E</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span><span>#FAFAF9</span></div>
-                            <div class="swatch" style="background-color: var(--foreground);"><span class="label">Text</span><span>#1C1917</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#16A34A</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#DC2626</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                             <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Ecology Field Notes</h4>
-                                <p>Observations from the local ecosystem study...</p>
+            
+            <!-- Theme 2: Sage Green & Stone -->
+            <div class="theme-section">
+                <h2>2. Sage Green & Stone</h2>
+                <p>An organic, natural palette that promotes peace and tranquility.</p>
+                <div class="theme-grid">
+                    <div>
+                        <h3>Light Mode</h3>
+                        <div class="themed theme-green light">
+                            <div class="swatch-container">
+                                <div class="swatch" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h3>Dark Mode</h3>
-                    <div class="themed theme-green dark">
-                         <div class="swatch-container">
-                            <div class="swatch swatch-light-text" style="background-color: var(--primary);"><span class="label">Primary</span><span>#A3E635</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--secondary);"><span class="label">Secondary</span><span>#A8A29E</span></div>
-                            <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span><span>#1C1917</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--foreground);"><span class="label">Text</span><span>#FAFAF9</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#22C55E</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#F87171</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                             <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Ecology Field Notes</h4>
-                                <p>Observations from the local ecosystem study...</p>
+                    <div>
+                        <h3>Dark Mode</h3>
+                        <div class="themed theme-green dark">
+                             <div class="swatch-container">
+                                <div class="swatch swatch-light-text" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Theme 3: Warm Taupe -->
-        <div class="theme-section">
-            <h2>3. Warm Taupe</h2>
-            <p>A sophisticated and neutral palette. It feels less like a tech product and more like a high-quality notebook. Warm, inviting, and professional without being cold.</p>
-            <div class="theme-grid">
-                <div>
-                    <h3>Light Mode</h3>
-                    <div class="themed theme-taupe light">
-                        <div class="swatch-container">
-                            <div class="swatch" style="background-color: var(--primary); color: var(--primary-fg);"><span class="label">Primary</span><span>#A16207</span></div>
-                            <div class="swatch" style="background-color: var(--secondary); color: var(--secondary-fg);"><span class="label">Secondary</span><span>#57534E</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span><span>#FEFCE8</span></div>
-                            <div class="swatch" style="background-color: var(--foreground);"><span class="label">Text</span><span>#1C1917</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#16A34A</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#DC2626</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                            <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Art History: Renaissance</h4>
-                                <p>Key artists and movements of the 15th century...</p>
+            <!-- Theme 3: Warm Taupe -->
+            <div class="theme-section">
+                <h2>3. Warm Taupe</h2>
+                <p>A sophisticated, neutral palette that feels like a high-quality notebook.</p>
+                <div class="theme-grid">
+                    <div>
+                        <h3>Light Mode</h3>
+                        <div class="themed theme-taupe light">
+                            <div class="swatch-container">
+                                <div class="swatch" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--background); border: 1px solid var(--border);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <h3>Dark Mode</h3>
-                    <div class="themed theme-taupe dark">
-                         <div class="swatch-container">
-                            <div class="swatch swatch-light-text" style="background-color: var(--primary);"><span class="label">Primary</span><span>#FBBF24</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--secondary);"><span class="label">Secondary</span><span>#A8A29E</span></div>
-                            <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span><span>#1C1917</span></div>
-                            <div class="swatch swatch-light-text" style="background-color: var(--foreground);"><span class="label">Text</span><span>#FEFCE8</span></div>
-                            <div class="swatch" style="background-color: var(--success);"><span class="label">Success</span><span>#22C55E</span></div>
-                            <div class="swatch" style="background-color: var(--error);"><span class="label">Error</span><span>#F87171</span></div>
-                        </div>
-                        <div class="component-showcase">
-                            <button class="button primary">Generate Quiz</button>
-                            <button class="button secondary">Add Note</button>
-                            <button class="button destructive">Delete</button>
-                            <input type="text" class="input" placeholder="Course Title...">
-                            <div class="card">
-                                <h4>Art History: Renaissance</h4>
-                                <p>Key artists and movements of the 15th century...</p>
+                    <div>
+                        <h3>Dark Mode</h3>
+                        <div class="themed theme-taupe dark">
+                             <div class="swatch-container">
+                                <div class="swatch swatch-light-text" style="background-color: var(--primary);"><span class="label">Primary</span></div>
+                                <div class="swatch swatch-light-text" style="background-color: var(--secondary);"><span class="label">Secondary</span></div>
+                                <div class="swatch" style="background-color: var(--background);"><span class="label">BG</span></div>
+                            </div>
+                            <div class="component-showcase">
+                                <button class="button primary">Generate Quiz</button>
+                                <input type="text" class="input" placeholder="Course Title...">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 </body>

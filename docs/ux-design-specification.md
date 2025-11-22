@@ -27,7 +27,17 @@ The decision was made to use a **Component-Led Design Strategy** rather than ado
 
 ### 2.1 Novel UX Patterns
 
-{{novel_ux_patterns}}
+#### Seamless AI Quiz Generation
+The primary novel user experience pattern is the **Seamless AI Quiz Generation**. This pattern is defined by its intentional simplicity from the user's perspective.
+
+- **The Problem:** Traditional AI tools often expose complex settings and require multiple steps (e.g., selecting models, adjusting parameters, waiting for foreground processing). This can be intimidating and distracting, contradicting our goal of a calm and focused environment.
+- **Our Solution:** We abstract this complexity entirely. The user's only task is to write their notes and click a single, prominent "Generate Quiz" button.
+- **The Experience:**
+    1.  **Single Click:** The user initiates the entire complex process with one action.
+    2.  **Asynchronous Processing:** The AI generation happens entirely in the background. The user is not blocked and is shown a clear, unobtrusive loading state.
+    3.  **Magical Result:** The quiz appears in place once ready. The experience is designed to feel fast and almost magical, as if the app anticipated the user's need and delivered the result with minimal effort.
+
+This pattern is "novel" in its deliberate rejection of user-facing complexity, making the powerful AI feel like a natural and effortless extension of the note-taking process.
 
 ---
 

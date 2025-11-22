@@ -26,7 +26,7 @@
         body {
             font-family: var(--font-sans);
             margin: 0;
-            transition: background-color 0.3s, color 0.3s;
+            background-color: #F8F9FA;
         }
         
         .showcase-container {
@@ -38,20 +38,32 @@
         .showcase-nav {
             flex-shrink: 0;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
             padding: 1rem;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid #dee2e6;
             background-color: #fff;
         }
         
+        .showcase-nav .nav-group {
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .showcase-nav .nav-group:not(:last-child) {
+            border-right: 1px solid #dee2e6;
+        }
+
         .showcase-nav button {
             border: 1px solid #ccc;
             background-color: #fff;
             padding: 0.5rem 1rem;
-            margin: 0 0.5rem;
+            margin: 0 0.25rem;
             border-radius: 6px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             cursor: pointer;
             transition: background-color 0.2s, border-color 0.2s;
         }
@@ -66,10 +78,14 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
         .direction {
             display: none;
+            width: 100%;
         }
 
         .direction.active {
@@ -78,19 +94,24 @@
         
         .direction-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
         .direction-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
         .direction-header p { font-size: 1.1rem; color: #64748B; max-width: 600px; margin: 0 auto; }
 
         .mockup-frame {
+            margin: 0 auto;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             overflow: hidden;
-            width: 100%;
-            height: 70vh;
             border: 1px solid #e2e8f0;
+            transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
         }
+
+        /* Viewport Sizes */
+        .viewport-desktop { width: 100%; height: 75vh; }
+        .viewport-tablet { width: 768px; height: 1024px; max-height: 75vh; }
+        .viewport-mobile { width: 375px; height: 667px; max-height: 75vh; }
 
         /* Shared Component Styles */
         .themed {
@@ -98,6 +119,7 @@
             height: 100%;
             display: flex;
             font-size: 15px;
+            overflow: hidden;
         }
         .themed.light {
             --primary: var(--primary-light); --primary-fg: var(--primary-fg-light);
@@ -127,73 +149,41 @@
         .themed .btn-secondary { background-color: var(--secondary); color: var(--secondary-fg); }
 
         /* --- DIRECTION 1: The Minimalist --- */
-        .minimalist-mockup { background-color: var(--background); color: var(--foreground); }
-        .minimalist-mockup .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid var(--border);
-            height: 60px;
-            box-sizing: border-box;
-        }
+        .minimalist-mockup { background-color: var(--background); color: var(--foreground); flex-direction: column; }
+        .minimalist-mockup .header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; border-bottom: 1px solid var(--border); height: 60px; box-sizing: border-box; flex-shrink: 0; }
         .minimalist-mockup .logo { font-weight: 700; font-size: 1.2rem; }
-        .minimalist-mockup .main-content { padding: 3rem; }
+        .minimalist-mockup .main-content { padding: 3rem; overflow-y: auto; }
         .minimalist-mockup h1 { font-size: 2.2rem; color: var(--foreground); margin-top: 0; border: none; padding: 0;}
         .minimalist-mockup .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem;}
-        .minimalist-mockup .course-card {
-            background-color: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+        .minimalist-mockup .course-card { background-color: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
         .minimalist-mockup .course-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
         .minimalist-mockup .course-card h3 { font-size: 1.1rem; margin: 0 0 0.5rem 0; color: var(--card-foreground); }
         .minimalist-mockup .course-card p { font-size: 0.9rem; color: var(--card-foreground); opacity: 0.7; margin: 0;}
 
         /* --- DIRECTION 2: The Power Dashboard --- */
         .dashboard-mockup { background-color: var(--background); color: var(--foreground); }
-        .dashboard-mockup .sidebar {
-            width: 240px;
-            background-color: var(--card);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-        }
+        .dashboard-mockup .sidebar { width: 240px; background-color: var(--card); border-right: 1px solid var(--border); padding: 1.5rem; display: flex; flex-direction: column; flex-shrink: 0; }
         .dashboard-mockup .sidebar .logo { font-weight: 700; font-size: 1.5rem; margin-bottom: 2rem; }
-        .dashboard-mockup .sidebar .nav-link {
-            display: block;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--foreground);
-            text-decoration: none;
-            opacity: 0.8;
-        }
+        .dashboard-mockup .sidebar .nav-link { display: block; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 0.5rem; font-weight: 500; color: var(--foreground); text-decoration: none; opacity: 0.8; }
         .dashboard-mockup .sidebar .nav-link:hover { background-color: var(--background); opacity: 1; }
         .dashboard-mockup .sidebar .nav-link.active { background-color: var(--primary); color: var(--primary-fg); opacity: 1; }
         .dashboard-mockup .sidebar .user-profile { margin-top: auto; }
-
         .dashboard-mockup .main-area { flex-grow: 1; padding: 2rem 3rem; overflow-y: auto;}
         .dashboard-mockup .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;}
         .dashboard-mockup h1 { font-size: 2rem; color: var(--foreground); margin: 0; border: none; padding: 0;}
         .dashboard-mockup .note-editor { display: flex; flex-direction: column; height: 90%; background: var(--card); border-radius: 8px; border: 1px solid var(--border);}
         .dashboard-mockup .note-title { font-size: 1.5rem; padding: 1rem 1.5rem; border: none; background: transparent; color: var(--foreground); font-weight: 600;}
         .dashboard-mockup .note-content { flex-grow: 1; font-size: 1rem; padding: 0 1.5rem; border: none; background: transparent; color: var(--foreground); resize: none; line-height: 1.7;}
-        .dashboard-mockup .note-toolbar { padding: 1rem 1.5rem; border-top: 1px solid var(--border); }
+        .dashboard-mockup .note-toolbar { padding: 1rem 1.5rem; border-top: 1px solid var(--border); text-align: right; }
         
-
         /* --- DIRECTION 3: The Notebook --- */
         .notebook-mockup { background-color: var(--background); color: var(--foreground); }
-        .notebook-mockup .course-pane { width: 280px; background-color: var(--card); border-right: 1px solid var(--border); padding: 1.5rem; }
+        .notebook-mockup .course-pane { width: 280px; background-color: var(--card); border-right: 1px solid var(--border); padding: 1.5rem; flex-shrink: 0;}
         .notebook-mockup h2 { font-size: 1.2rem; margin: 0 0 1.5rem 0; padding: 0 0 0.5rem 0; border-color: var(--border); }
         .notebook-mockup .note-list a { display: block; padding: 0.6rem 0; text-decoration: none; color: var(--foreground); opacity: 0.7; font-weight: 500;}
         .notebook-mockup .note-list a:hover { opacity: 1; }
         .notebook-mockup .note-list a.active { opacity: 1; font-weight: 700; }
-        .notebook-mockup .main-editor-area { flex-grow: 1; display: flex; justify-content: center; padding: 2rem; }
+        .notebook-mockup .main-editor-area { flex-grow: 1; display: flex; justify-content: center; padding: 2rem; overflow-y: auto;}
         .notebook-mockup .editor-content { max-width: 800px; width: 100%;}
         .notebook-mockup .editor-content h1 { font-size: 2.5rem; padding-bottom: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border);}
         .notebook-mockup .quiz-view { margin-top: 2rem; }
@@ -203,15 +193,47 @@
         .notebook-mockup .question li { padding: 0.2rem 0; opacity: 0.8; }
         .notebook-mockup .question li.correct { font-weight: 600; opacity: 1; }
         
+        /* --- DIRECTION 4: The Command Center --- */
+        .command-center-mockup { background-color: var(--background); color: var(--foreground); font-size: 14px; }
+        .command-center-mockup .main-grid { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto 1fr; height: 100%;}
+        .command-center-mockup .header { grid-column: 1 / -1; display: flex; align-items: center; padding: 0 1rem; height: 50px; border-bottom: 1px solid var(--border); }
+        .command-center-mockup .main-content { grid-column: 1 / 2; padding: 1.5rem; }
+        .command-center-mockup .sidebar-right { grid-column: 2 / 3; grid-row: 1 / -1; border-left: 1px solid var(--border); padding: 1.5rem; }
+        .command-center-mockup h3 { margin: 0 0 1rem 0; font-size: 1.1rem; }
+        .command-center-mockup .stat-card { background: var(--card); padding: 1rem; border-radius: 6px; border: 1px solid var(--border); margin-bottom: 1rem; }
+        
+        /* --- DIRECTION 5: The Guided Path --- */
+        .guided-path-mockup { background-color: var(--background); color: var(--foreground); justify-content: center; align-items: center; }
+        .guided-path-mockup .wizard { width: 600px; background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 3rem; text-align: center; }
+        .guided-path-mockup h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .guided-path-mockup p { opacity: 0.7; margin-bottom: 2rem; }
+        .guided-path-mockup .step-indicator { margin-bottom: 2rem; }
+        .guided-path-mockup .btn-group { display: flex; justify-content: space-between; margin-top: 2rem;}
 
+        /* --- DIRECTION 6: The Social Hub --- */
+        .social-hub-mockup { background-color: var(--background); color: var(--foreground); }
+        .social-hub-mockup .main-content { flex-grow: 1; padding: 2rem; }
+        .social-hub-mockup .activity-feed { list-style: none; padding: 0;}
+        .social-hub-mockup .activity-item { display: flex; align-items: center; padding: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; }
+        .social-hub-mockup .activity-item .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); margin-right: 1rem; }
     </style>
 </head>
 <body>
     <div class="showcase-container">
         <nav class="showcase-nav">
-            <button class="active" onclick="showDirection('dir1')">1. The Minimalist</button>
-            <button onclick="showDirection('dir2')">2. The Power Dashboard</button>
-            <button onclick="showDirection('dir3')">3. The Notebook</button>
+            <div class="nav-group">
+                <button class="active" onclick="showDirection('dir1')">1. Minimalist</button>
+                <button onclick="showDirection('dir2')">2. Dashboard</button>
+                <button onclick="showDirection('dir3')">3. Notebook</button>
+                <button onclick="showDirection('dir4')">4. Command Center</button>
+                <button onclick="showDirection('dir5')">5. Guided Path</button>
+                <button onclick="showDirection('dir6')">6. Social Hub</button>
+            </div>
+            <div class="nav-group">
+                <button class="active" onclick="setViewport('desktop')">Desktop</button>
+                <button onclick="setViewport('tablet')">Tablet</button>
+                <button onclick="setViewport('mobile')">Mobile</button>
+            </div>
         </nav>
         <main class="showcase-main">
             <div id="dir1" class="direction active">
@@ -219,23 +241,21 @@
                     <h2>Direction 1: The Minimalist</h2>
                     <p>This design prioritizes maximum calm and focus. Navigation is simple and content is spacious. Best for users who want zero distractions.</p>
                 </div>
-                <div class="mockup-frame">
+                <div class="mockup-frame viewport-desktop">
                     <div class="themed light minimalist-mockup">
-                        <div style="width: 100%; display: flex; flex-direction: column;">
-                            <header class="header">
-                                <div class="logo">AI Study Buddy</div>
-                                <div><button class="btn-primary">New Course</button></div>
-                            </header>
-                            <main class="main-content">
-                                <h1>Your Courses</h1>
-                                <div class="course-grid">
-                                    <div class="course-card"><h3>Biology 101</h3><p>Introductory concepts</p></div>
-                                    <div class="course-card"><h3>History of Rome</h3><p>From Republic to Empire</p></div>
-                                    <div class="course-card"><h3>Art History</h3><p>15th Century Movements</p></div>
-                                    <div class="course-card"><h3>Calculus II</h3><p>Advanced topics</p></div>
-                                </div>
-                            </main>
-                        </div>
+                        <header class="header">
+                            <div class="logo">AI Study Buddy</div>
+                            <div><button class="btn-primary">New Course</button></div>
+                        </header>
+                        <main class="main-content">
+                            <h1>Your Courses</h1>
+                            <div class="course-grid">
+                                <div class="course-card"><h3>Biology 101</h3><p>Introductory concepts</p></div>
+                                <div class="course-card"><h3>History of Rome</h3><p>From Republic to Empire</p></div>
+                                <div class="course-card"><h3>Art History</h3><p>15th Century Movements</p></div>
+                                <div class="course-card"><h3>Calculus II</h3><p>Advanced topics</p></div>
+                            </div>
+                        </main>
                     </div>
                 </div>
             </div>
@@ -245,7 +265,7 @@
                     <h2>Direction 2: The Power Dashboard</h2>
                     <p>This design feels like a powerful productivity tool. A persistent sidebar gives quick access to everything. Best for users who want efficiency and control.</p>
                 </div>
-                <div class="mockup-frame">
+                <div class="mockup-frame viewport-desktop">
                     <div class="themed dark dashboard-mockup">
                         <aside class="sidebar">
                             <div class="logo">ASB</div>
@@ -261,10 +281,8 @@
                             </div>
                             <div class="note-editor">
                                 <input type="text" class="note-title" value="Chapter 5: Key Concepts">
-                                <textarea class="note-content">Mitochondria are the powerhouse of the cell.
-Glycolysis is the process of breaking down glucose.
-The Krebs cycle is a series of chemical reactions used by all aerobic organisms to release stored energy.</textarea>
-                                <div class="note-toolbar" style="text-align: right;">
+                                <textarea class="note-content">Mitochondria are the powerhouse of the cell...</textarea>
+                                <div class="note-toolbar">
                                     <span style="opacity: 0.6; font-size: 0.9rem; margin-right: 1rem;">Auto-saved</span>
                                 </div>
                             </div>
@@ -276,49 +294,96 @@ The Krebs cycle is a series of chemical reactions used by all aerobic organisms 
             <div id="dir3" class="direction">
                 <div class="direction-header">
                     <h2>Direction 3: The Notebook</h2>
-                    <p>This design feels like a digital version of a high-quality paper notebook. The focus is on content, with navigation mimicking tabs or sections. Best for a focused, content-first experience.</p>
+                    <p>This design feels like a digital version of a high-quality paper notebook. The focus is on content, with navigation mimicking tabs or sections.</p>
                 </div>
-                <div class="mockup-frame">
+                <div class="mockup-frame viewport-desktop">
                     <div class="themed light notebook-mockup">
                         <aside class="course-pane">
                             <h2>History of Rome</h2>
                             <div class="note-list">
                                 <a href="#">The Founding of Rome</a>
                                 <a href="#" class="active">The Roman Republic</a>
-                                <a href="#">Julius Caesar</a>
-                                <a href="#">The Roman Empire</a>
                             </div>
                         </aside>
                         <main class="main-editor-area">
                             <div class="editor-content">
                                 <h1>Quiz: The Roman Republic</h1>
                                 <p style="opacity: 0.7;">Generated from your notes.</p>
-                                
                                 <div class="quiz-view">
-                                    <div class="question">
-                                        <h3>1. Who were the legendary founders of Rome?</h3>
-                                        <ol>
-                                            <li class="correct">a) Romulus and Remus</li>
-                                            <li>b) Caesar and Augustus</li>
-                                            <li>c) Plato and Aristotle</li>
-                                            <li>d) Antony and Cleopatra</li>
-                                        </ol>
-                                    </div>
-                                    <div class="question">
-                                        <h3>2. What was the main governing body of the Roman Republic?</h3>
-                                        <ol>
-                                            <li>a) The Parliament</li>
-                                            <li class="correct">b) The Senate</li>
-                                            <li>c) The Assembly</li>
-                                            <li>d) The Council</li>
-                                        </ol>
-                                    </div>
+                                    <div class="question"><h3>1. Who were the legendary founders of Rome?</h3></div>
                                 </div>
                             </div>
                         </main>
                     </div>
                 </div>
             </div>
+            
+            <div id="dir4" class="direction">
+                <div class="direction-header">
+                    <h2>Direction 4: The Command Center</h2>
+                    <p>A dense, data-rich interface for power users who want to see statistics and performance at a glance.</p>
+                </div>
+                <div class="mockup-frame viewport-desktop">
+                    <div class="themed light command-center-mockup">
+                        <div class="main-grid">
+                            <header class="header"><h3>Dashboard</h3></header>
+                            <main class="main-content">
+                                <h3>Recent Activity</h3>
+                                <!-- content -->
+                            </main>
+                            <aside class="sidebar-right">
+                                <h3>Statistics</h3>
+                                <div class="stat-card"><p>Quizzes Generated: 42</p></div>
+                                <div class="stat-card"><p>Average Score: 88%</p></div>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dir5" class="direction">
+                <div class="direction-header">
+                    <h2>Direction 5: The Guided Path</h2>
+                    <p>A wizard-style interface that walks the user through creating a quiz step-by-step. Ideal for new or infrequent users.</p>
+                </div>
+                <div class="mockup-frame viewport-desktop">
+                    <div class="themed light guided-path-mockup">
+                        <div class="wizard">
+                            <div class="step-indicator">Step 2 of 3</div>
+                            <h1>Add Your Notes</h1>
+                            <p>Paste or type the notes you want to be quizzed on.</p>
+                            <textarea style="width: 100%; height: 150px;"></textarea>
+                            <div class="btn-group">
+                                <button class="btn-secondary">Back</button>
+                                <button class="btn-primary">Next: Generate Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dir6" class="direction">
+                <div class="direction-header">
+                    <h2>Direction 6: The Social Hub</h2>
+                    <p>An experience focused on collaboration, sharing, and friendly competition.</p>
+                </div>
+                <div class="mockup-frame viewport-desktop">
+                    <div class="themed dark social-hub-mockup">
+                        <aside class="sidebar">
+                             <div class="logo">ASB</div>
+                             <!-- nav links -->
+                        </aside>
+                        <main class="main-content">
+                            <h1>Activity Feed</h1>
+                            <ul class="activity-feed">
+                                <li class="activity-item"><div class="avatar"></div> <p><strong>You</strong> shared a quiz on "Biology 101".</p></li>
+                                <li class="activity-item"><div class="avatar"></div> <p><strong>Jane Doe</strong> scored 95% on your "History of Rome" quiz.</p></li>
+                            </ul>
+                        </main>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -327,8 +392,17 @@ The Krebs cycle is a series of chemical reactions used by all aerobic organisms 
             document.querySelectorAll('.direction').forEach(dir => dir.classList.remove('active'));
             document.getElementById(dirId).classList.add('active');
             
-            document.querySelectorAll('.showcase-nav button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.showcase-nav .nav-group:first-child button').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`button[onclick="showDirection('${dirId}')"]`).classList.add('active');
+        }
+
+        function setViewport(size) {
+            const frame = document.querySelector('.mockup-frame');
+            frame.classList.remove('viewport-desktop', 'viewport-tablet', 'viewport-mobile');
+            frame.classList.add(`viewport-${size}`);
+
+            document.querySelectorAll('.showcase-nav .nav-group:last-child button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`button[onclick="setViewport('${size}')"]`).classList.add('active');
         }
     </script>
 </body>
