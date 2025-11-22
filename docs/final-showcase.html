@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Study Buddy - Key Screens Showcase</title>
+    <style>
+        :root {
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        .showcase-header {
+            background-color: #fff;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .showcase-header h1 { font-size: 1.5rem; margin: 0; }
+        .showcase-header .controls { display: flex; align-items: center; gap: 1.5rem; }
+        .showcase-header .tabs button {
+            border: none;
+            background: none;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+            cursor: pointer;
+            color: #475569;
+            border-bottom: 2px solid transparent;
+        }
+        .showcase-header .tabs button.active {
+            color: #2563EB;
+            border-bottom-color: #2563EB;
+            font-weight: 600;
+        }
+        .showcase-header .mode-toggle { display: flex; align-items: center; gap: 0.5rem; }
+
+
+        .showcase-body {
+            padding: 2rem;
+        }
+        
+        .screen {
+            display: none;
+            
+        }
+        .screen.active {
+            display: block;
+        }
+
+        .mockup-frame {
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            height: 75vh;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* THEME STYLES */
+        .themed {
+            --primary-light: #2563EB; --primary-dark: #3B82F6;
+            --primary-fg-light: #FFFFFF; --primary-fg-dark: #FFFFFF;
+            --secondary-light: #475569; --secondary-dark: #94A3B8;
+            --secondary-fg-light: #FFFFFF; --secondary-fg-dark: #0F172A;
+            --background-light: #F8FAFC; --background-dark: #020617;
+            --foreground-light: #0F172A; --foreground-dark: #F8FAFC;
+            --card-light: #FFFFFF; --card-dark: #0F172A;
+            --border-light: #E2E8F0; --border-dark: #1E293B;
+            --success-light: #16A34A; --success-dark: #22C55E;
+            --error-light: #DC2626; --error-dark: #F87171;
+
+            width: 100%;
+            height: 100%;
+            display: flex;
+            font-size: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .themed.light {
+            --primary: var(--primary-light); --primary-fg: var(--primary-fg-light);
+            --secondary: var(--secondary-light); --secondary-fg: var(--secondary-fg-light);
+            --background: var(--background-light); --foreground: var(--foreground-light);
+            --card: var(--card-light); --border: var(--border-light);
+            --success: var(--success-light); --error: var(--error-light);
+        }
+        .themed.dark {
+            --primary: var(--primary-dark); --primary-fg: var(--primary-fg-dark);
+            --secondary: var(--secondary-dark); --secondary-fg: var(--secondary-fg-dark);
+            --background: var(--background-dark); --foreground: var(--foreground-dark);
+            --card: var(--card-dark); --border: var(--border-dark);
+            --success: var(--success-dark); --error: var(--error-dark);
+        }
+
+        /* SHARED COMPONENTS */
+        .sidebar {
+            width: 240px;
+            background-color: var(--card);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar .logo { font-weight: 700; font-size: 1.5rem; color: var(--primary); margin-bottom: 2rem; }
+        .sidebar .nav-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--foreground);
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        .sidebar .nav-link:hover { background-color: var(--background); opacity: 1; }
+        .sidebar .nav-link.active { background-color: var(--primary); color: var(--primary-fg); opacity: 1; }
+        .sidebar .user-profile { margin-top: auto; border-top: 1px solid var(--border); padding-top: 1rem;}
+
+        .main-area { flex-grow: 1; padding: 2rem 3rem; overflow-y: auto; background-color: var(--background); color: var(--foreground);}
+        .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;}
+        .main-header h1 { font-size: 2rem; color: var(--foreground); margin: 0; border: none; padding: 0;}
+        
+        .btn { border: none; padding: 0.6rem 1.2rem; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; }
+        .btn-primary { background-color: var(--primary); color: var(--primary-fg); }
+        .btn-secondary { background-color: var(--secondary); color: var(--secondary-fg); }
+        .btn-destructive { background-color: var(--error); color: #fff; }
+
+        /* SCREEN-SPECIFIC STYLES */
+        .empty-state { text-align: center; margin-top: 10vh; }
+        .empty-state h2 { font-size: 1.2rem; color: var(--foreground); opacity: 0.8; }
+        .empty-state p { opacity: 0.6; margin-bottom: 2rem; }
+
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+        .course-card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .course-card h3 { font-size: 1.1rem; margin: 0 0 0.5rem 0; color: var(--foreground); }
+        .course-card p { font-size: 0.9rem; color: var(--foreground); opacity: 0.7; margin: 0;}
+        
+        .note-editor { display: flex; flex-direction: column; height: calc(100% - 70px); background: var(--card); border-radius: 8px; border: 1px solid var(--border);}
+        .note-title { font-size: 1.5rem; padding: 1rem 1.5rem; border: none; outline: none; background: transparent; color: var(--foreground); font-weight: 600;}
+        .note-content { flex-grow: 1; font-size: 1rem; padding: 0 1.5rem; border: none; outline: none; background: transparent; color: var(--foreground); resize: none; line-height: 1.7;}
+        .note-toolbar { padding: 1rem 1.5rem; border-top: 1px solid var(--border); text-align: right; color: var(--foreground); opacity: 0.6;}
+
+        .quiz-view { background-color: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 2rem;}
+        .quiz-view .question { margin-bottom: 2rem; }
+        .quiz-view h3 { font-size: 1.2rem; margin-bottom: 1rem; font-weight: 600; }
+        .quiz-view ol { list-style-position: inside; padding-left: 0; line-height: 1.8; }
+        .quiz-view li { padding: 0.2rem 0; }
+        .quiz-view .correct-answers { border-top: 1px solid var(--border); margin-top: 3rem; padding-top: 2rem; }
+
+    </style>
+</head>
+<body>
+    <header class="showcase-header">
+        <h1>Key Screens Showcase</h1>
+        <div class="controls">
+            <div class="tabs">
+                <button class="active" onclick="showScreen('screen1')">Dashboard (Empty)</button>
+                <button onclick="showScreen('screen2')">Dashboard (Courses)</button>
+                <button onclick="showScreen('screen3')">Note Editor</button>
+                <button onclick="showScreen('screen4')">Quiz View</button>
+            </div>
+            <div class="mode-toggle">
+                <label for="mode-switcher">Dark Mode</label>
+                <input type="checkbox" id="mode-switcher" onchange="toggleMode(this.checked)">
+            </div>
+        </div>
+    </header>
+
+    <main class="showcase-body">
+        
+        <!-- Screen 1: Dashboard (Empty) -->
+        <div id="screen1" class="screen active">
+            <div class="mockup-frame">
+                <div class="themed light" id="themed-frame-1">
+                    <aside class="sidebar">
+                        <div class="logo">ASB</div>
+                        <a href="#" class="nav-link active">Dashboard</a>
+                        <a href="#" class="nav-link">All Quizzes</a>
+                        <div class="user-profile"><a href="#" class="nav-link">User Profile</a></div>
+                    </aside>
+                    <main class="main-area">
+                        <div class="empty-state">
+                            <h2>You have no courses yet</h2>
+                            <p>Get started by creating your first course.</p>
+                            <button class="btn btn-primary">Create Your First Course</button>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 2: Dashboard (With Courses) -->
+        <div id="screen2" class="screen">
+            <div class="mockup-frame">
+                <div class="themed light" id="themed-frame-2">
+                    <aside class="sidebar">
+                        <div class="logo">ASB</div>
+                        <a href="#" class="nav-link active">Dashboard</a>
+                        <a href="#" class="nav-link">All Quizzes</a>
+                        <div class="user-profile"><a href="#" class="nav-link">User Profile</a></div>
+                    </aside>
+                    <main class="main-area">
+                        <div class="main-header">
+                            <h1>Dashboard</h1>
+                            <button class="btn btn-primary">New Course</button>
+                        </div>
+                        <div class="course-grid">
+                            <div class="course-card"><h3>Biology 101</h3><p>Introductory concepts</p></div>
+                            <div class="course-card"><h3>History of Rome</h3><p>From Republic to Empire</p></div>
+                            <div class="course-card"><h3>Art History</h3><p>15th Century Movements</p></div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 3: Note Editor -->
+        <div id="screen3" class="screen">
+            <div class="mockup-frame">
+                <div class="themed light" id="themed-frame-3">
+                    <aside class="sidebar">
+                        <div class="logo">ASB</div>
+                        <a href="#" class="nav-link">Dashboard</a>
+                        <a href="#" class="nav-link active">History of Rome</a>
+                        <a href="#" class="nav-link">All Quizzes</a>
+                        <div class="user-profile"><a href="#" class="nav-link">User Profile</a></div>
+                    </aside>
+                    <main class="main-area">
+                        <div class="main-header">
+                            <h1>Note Editor</h1>
+                            <button class="btn btn-primary">Generate Quiz</button>
+                        </div>
+                        <div class="note-editor">
+                            <input type="text" class="note-title" value="The Roman Republic">
+                            <textarea class="note-content">The Roman Republic was the era of classical Roman civilization, beginning with the overthrow of the Roman Kingdom, traditionally dated to 509 BC, and ending in 27 BC with the establishment of the Roman Empire.</textarea>
+                            <div class="note-toolbar"><span>Auto-saved a few seconds ago</span></div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 4: Quiz View -->
+        <div id="screen4" class="screen">
+            <div class="mockup-frame">
+                <div class="themed light" id="themed-frame-4">
+                    <aside class="sidebar">
+                        <div class="logo">ASB</div>
+                        <a href="#" class="nav-link">Dashboard</a>
+                        <a href="#" class="nav-link active">History of Rome</a>
+                        <a href="#" class="nav-link">All Quizzes</a>
+                        <div class="user-profile"><a href="#" class="nav-link">User Profile</a></div>
+                    </aside>
+                    <main class="main-area">
+                        <div class="main-header">
+                            <h1>Quiz: The Roman Republic</h1>
+                            <div>
+                                <button class="btn btn-secondary">Copy Quiz</button>
+                                <button class="btn btn-destructive">Delete Quiz</button>
+                            </div>
+                        </div>
+                        <div class="quiz-view">
+                            <div class="question">
+                                <h3>1. When was the Roman Republic traditionally founded?</h3>
+                                <ol>
+                                    <li>a) 753 BC</li>
+                                    <li>b) 509 BC</li>
+                                    <li>c) 27 BC</li>
+                                    <li>d) 476 AD</li>
+                                </ol>
+                            </div>
+                            <div class="question">
+                                <h3>2. What event marked the end of the Republic?</h3>
+                                <ol>
+                                    <li>a) The Punic Wars</li>
+                                    <li>b) The assassination of Julius Caesar</li>
+                                    <li>c) The establishment of the Roman Empire</li>
+                                    <li>d) The slave revolt led by Spartacus</li>
+                                </ol>
+                            </div>
+                            <div class="correct-answers">
+                                <h2>Correct Answers</h2>
+                                <p>1: b, 2: c</p>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            
+            document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`button[onclick="showScreen('${screenId}')"]`).classList.add('active');
+        }
+
+        function toggleMode(isDark) {
+            document.querySelectorAll('.themed').forEach(frame => {
+                if (isDark) {
+                    frame.classList.remove('light');
+                    frame.classList.add('dark');
+                } else {
+                    frame.classList.remove('dark');
+                    frame.classList.add('light');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
