@@ -101,9 +101,9 @@ All endpoints are prefixed with `/api/v1` and require a valid JWT for authorizat
 *   `PUT /{course_id}`: Update a course.
 *   `DELETE /{course_id}`: Delete a course.
 
-#### **Notes (`/notes`)**
-*   `GET /?course_id={course_id}`: Get all notes for a course.
-*   `POST /`: Create a new note.
+#### **Notes (`/courses/{course_id}/notes`)**
+*   `GET /`: Get all notes for a course.
+*   `POST /`: Create a new note within the course.
 *   `GET /{note_id}`: Get a single note.
 *   `PUT /{note_id}`: Update a note.
 *   `DELETE /{note_id}`: Delete a note.
