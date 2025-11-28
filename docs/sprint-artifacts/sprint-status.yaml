@@ -7,7 +7,7 @@ end_date: "2025-12-04"
 stories:
   - id: "Story 1.1"
     title: "Project Setup & Foundation"
-    status: "in-progress"
+    status: "done"
   - id: "Story 1.2"
     title: "User Profile Model & Database Schema"
     status: "To Do"
