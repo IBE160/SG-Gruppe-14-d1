@@ -1,0 +1,181 @@
+<story-context id="1-1-project-setup-foundation.context.xml" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1.1</storyId>
+    <title>Project Setup &amp; Foundation</title>
+    <status>drafted</status>
+    <generatedAt>2025-11-28</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-1-project-setup-foundation.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>developer</asA>
+    <iWant>a standardized project structure and build system</iWant>
+    <soThat>I can begin development efficiently</soThat>
+    <tasks>
+      <task id="1">
+        <description>Initialize Next.js project in /app</description>
+        <subtask>- npx create-next-app@latest app</subtask>
+        <subtask>- Configure package.json</subtask>
+        <acceptance-criteria-ref>1, 2</acceptance-criteria-ref>
+      </task>
+      <task id="2">
+        <description>Set up FastAPI project in /api</description>
+        <subtask>- Create api/ directory</subtask>
+        <subtask>- Initialize pyproject.toml</subtask>
+        <subtask>- Install FastAPI, Uvicorn, Pydantic</subtask>
+        <acceptance-criteria-ref>1, 2</acceptance-criteria-ref>
+      </task>
+      <task id="3">
+        <description>Configure basic CI/CD pipeline</description>
+        <subtask>- Create .github/workflows/main.yml</subtask>
+        <subtask>- Add basic test commands for frontend and backend</subtask>
+        <acceptance-criteria-ref>3</acceptance-criteria-ref>
+      </task>
+      <task id="4">
+        <description>Document project setup steps in README.md</description>
+      </task>
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+    <criterion id="1">
+      <given>the project repository is cloned</given>
+      <when>I run the project setup script</when>
+      <then>the required dependencies for the Next.js frontend and FastAPI backend are installed.</then>
+    </criterion>
+    <criterion id="2">
+      <given>the project repository is cloned</given>
+      <when>I run the project setup script</when>
+      <then>the basic folder structure for frontend (/app) and backend (/api) is created.</then>
+    </criterion>
+    <criterion id="3">
+      <given>the project repository is cloned</given>
+      <when>I run the project setup script</when>
+      <then>a basic CI/CD pipeline is configured to run tests on push.</then>
+    </criterion>
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>ibe160 - Epic Breakdown</title>
+        <section>Story 1.1: Project Setup &amp; Foundation</section>
+        <snippet>This story involves setting up the initial scaffolding for the Next.js and FastAPI applications. It includes initializing npm and pip, installing core libraries (React, Next.js, FastAPI, Uvicorn, Pydantic), and creating the source code directories.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>AI Study Buddy - Solution Architecture</title>
+        <section>2. Scaffolding &amp; Project Initialization</section>
+        <snippet>The project will be structured as a monorepo with two distinct packages: /app for the frontend and /api for the backend. To initialize the project: Frontend (Next.js): npx create-next-app@latest app. Backend (FastAPI): A Python project will be manually set up in the /api directory with a pyproject.toml to manage dependencies.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; User Onboarding</title>
+        <section>Detailed Design - Services and Modules</section>
+        <snippet>Frontend (Next.js /app): /app/(auth)/login/page.js, /app/(auth)/signup/page.js, lib/api.js, lib/supabase.js. Backend (FastAPI /api): api/main.py, api/v1/endpoints/auth.py, core/security.py, db/models.py, db/session.py.</snippet>
+      </doc>
+      <doc>
+        <path>docs/sprint-artifacts/tech-spec-epic-1.md</path>
+        <title>Epic Technical Specification: Foundation &amp; User Onboarding</title>
+        <section>Dependencies and Integrations</section>
+        <snippet>Next.js (Frontend), FastAPI (Backend), Supabase (Authentication service, PostgreSQL database), Python `requests` / `httpx` (Backend), NPM / Yarn (Frontend package management), Pip / Poetry (Backend package management), GitHub Actions (Basic CI/CD pipeline).</snippet>
+      </doc>
+    </docs>
+    <code>
+      <code-artifact>
+        <path>/app/</path>
+        <kind>directory</kind>
+        <symbol>Next.js application</symbol>
+        <reason>Frontend application root</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>/api/</path>
+        <kind>directory</kind>
+        <symbol>FastAPI application</symbol>
+        <reason>Backend application root</reason>
+      </code-artifact>
+      <code-artifact>
+        <path>.github/workflows/</path>
+        <kind>directory</kind>
+        <symbol>CI/CD workflows</symbol>
+        <reason>Location for GitHub Actions configuration</reason>
+      </code-artifact>
+    </code>
+    <dependencies>
+      <dependency ecosystem="Node.js">
+        <package>Next.js</package>
+      </dependency>
+      <dependency ecosystem="Node.js">
+        <package>React</package>
+      </dependency>
+      <dependency ecosystem="Python">
+        <package>FastAPI</package>
+      </dependency>
+      <dependency ecosystem="Python">
+        <package>Uvicorn</package>
+      </dependency>
+      <dependency ecosystem="Python">
+        <package>Pydantic</package>
+      </dependency>
+      <dependency ecosystem="External">
+        <package>Supabase</package>
+        <note>For PostgreSQL and Authentication</note>
+      </dependency>
+      <dependency ecosystem="CI/CD">
+        <package>GitHub Actions</package>
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>
+      <type>Architectural</type>
+      <description>Project must adhere to monorepo structure with Next.js in /app and FastAPI in /api.</description>
+      <source>docs/architecture.md</source>
+    </constraint>
+    <constraint>
+      <type>Technical</type>
+      <description>Utilize Npx create-next-app for frontend scaffolding and manual setup for FastAPI.</description>
+      <source>docs/architecture.md</source>
+    </constraint>
+    <constraint>
+      <type>Technical</type>
+      <description>Dependencies: npm/yarn for frontend, pip/poetry for backend.</description>
+      <source>docs/epics.md</source>
+    </constraint>
+  </constraints>
+
+  <interfaces>
+    <interface>
+      <name>Frontend-Backend Interaction</name>
+      <kind>API Interaction</kind>
+      <signature>HTTPS API calls between Next.js frontend and FastAPI backend.</signature>
+      <path>docs/architecture.md</path>
+    </interface>
+  </interfaces>
+
+  <tests>
+    <standards>
+      Initial CI/CD will include placeholder tests. Further test strategy (Unit, Integration, E2E) is defined in the Epic 1 Tech Spec, with GitHub Actions as the CI/CD platform.
+    </standards>
+    <locations>
+      <location>/app/test/</location>
+      <location>/api/test/</location>
+      <location>.github/workflows/</location>
+    </locations>
+    <ideas>
+      <idea ac-id="1">
+        Verify `npm install` and `pip install` commands execute successfully in respective directories after cloning.
+      </idea>
+      <idea ac-id="2">
+        Check for existence of `/app` and `/api` directories and key files (e.g., `package.json`, `pyproject.toml`).
+      </idea>
+      <idea ac-id="3">
+        Verify `.github/workflows/main.yml` exists and contains basic `test` jobs that pass.
+      </idea>
+    </ideas>
+  </tests>
+</story-context>
