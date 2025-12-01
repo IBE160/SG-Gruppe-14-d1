@@ -1,0 +1,99 @@
+<story-context id="bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>1.2</storyId>
+    <title>User Profile Model &amp; Database Schema</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-01</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-2-user-profile-model-database-schema.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a developer</asA>
+    <iWant>a database schema for user profiles</iWant>
+    <soThat>user profile information can be stored securely</soThat>
+    <tasks>
+- [ ] **Task 1: Create Supabase Migration File** (AC: 1, 2, 3)
+  - [ ] Create a new SQL migration file in the `supabase/migrations/` directory.
+  - [ ] Define the `CREATE TABLE` statement for the `profiles` table.
+- [ ] **Task 2: Define `profiles` Table Schema** (AC: 1, 2, 3)
+  - [ ] Add the `id` column as `uuid` and set it as the `PRIMARY KEY`.
+  - [ ] Add the `name` column as `text`.
+  - [ ] Add the `created_at` column as `timestamptz` with a `NOT NULL` constraint and a default value of `now()`.
+  - [ ] Add the foreign key constraint on the `id` column to reference `auth.users.id`.
+- [ ] **Task 3: Write validation test** (AC: 1, 2, 3)
+    - [ ] Create a test that runs the migration and then verifies that the `profiles` table exists and has the correct columns and constraints.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1.  **Given** the database connection is configured, **When** the database migration is run, **Then** a `profiles` table is created with columns for `id` (UUID, Primary Key), `name` (text), and `created_at` (timestamp with time zone). (Source: `docs/epics.md#story-1.2`)
+2.  **And** the `id` column is configured with a foreign key relationship to `auth.users.id` to link profiles to the authentication schema. (Source: `docs/epics.md#story-1.2`)
+3.  **And** the `created_at` column has a default value of `now()`. (Source: `docs/architecture.md#4-database-schema`)
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>AI Study Buddy - Solution Architecture</title>
+        <section>4. Database Schema</section>
+        <snippet>The `profiles` table will store public user data and is linked to the `auth.users` table via a foreign key.</snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>ibe160 - Epic Breakdown</title>
+        <section>Story 1.2: User Profile Model &amp; Database Schema</section>
+        <snippet>This story covers the creation of the `profiles` table using Supabase, including columns for id, name, and created_at, and its relationship to the authentication schema.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>IBE160 - Product Requirements Document</title>
+        <section>Non-Functional Requirements</section>
+        <snippet>NFR-2: Securely handle user data (personal info, notes) with encryption in transit (TLS) and at rest. Enforce strict authorization for data access.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <file>
+        <path>.github/workflows/main.yml</path>
+        <kind>ci-workflow</kind>
+        <reason>The CI pipeline is configured to run backend tests (`pytest`), which will execute the validation test for this database migration.</reason>
+      </file>
+    </code>
+    <dependencies>
+      <npm>
+        <package name="next" version="16.0.5"/>
+        <package name="react" version="19.2.0"/>
+        <package name="react-dom" version="19.2.0"/>
+      </npm>
+      <pip>
+        <package name="fastapi" version="0.104.1"/>
+        <package name="uvicorn" version="0.23.2"/>
+        <package name="pydantic" version="1.10.12"/>
+        <package name="pytest" version="7.4.0"/>
+      </pip>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>The database solution must be Supabase Postgres.</constraint>
+    <constraint>The `profiles` table schema must match the definition in `docs/architecture.md`.</constraint>
+    <constraint>The `id` of a profile must correspond to an existing user in `auth.users`.</constraint>
+  </constraints>
+
+  <interfaces>
+    <!-- No new interfaces are defined in this story. -->
+  </interfaces>
+
+  <tests>
+    <standards>A test should be created to validate that the database migration runs correctly and creates the table as specified in the acceptance criteria. This test should be added to the `pytest` suite in the `/api` directory.</standards>
+    <locations>
+      <location type="migrations">supabase/migrations/</location>
+      <location type="tests">api/tests/</location>
+    </locations>
+    <ideas>
+      <idea for="AC:1,2,3">Write a `pytest` test that connects to a test database, runs the new migration, and then inspects the database schema to confirm the `profiles` table was created with the correct columns, types, and foreign key constraints.</idea>
+    </ideas>
+  </tests>
+</story-context>

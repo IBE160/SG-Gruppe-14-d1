@@ -10,7 +10,7 @@ stories:
     status: "done"
   - id: "Story 1.2"
     title: "User Profile Model & Database Schema"
-    status: "To Do"
+    status: "done"
   - id: "Story 1.3"
     title: "User Registration Endpoint"
     status: "To Do"
