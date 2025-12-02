@@ -13,7 +13,7 @@ stories:
     status: "done"
   - id: "Story 1.3"
     title: "User Registration Endpoint"
-    status: "To Do"
+    status: "in-progress"
   - id: "Story 1.4"
     title: "User Login Endpoint"
     status: "To Do"

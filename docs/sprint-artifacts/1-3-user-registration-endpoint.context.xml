@@ -1,0 +1,174 @@
+<story-context id=".bmad/bmm/workflows/4-implementation/story-context/template" v="1.0">
+  <metadata>
+    <epicId>1</epicId>
+    <storyId>3</storyId>
+    <title>User Registration Endpoint</title>
+    <status>drafted</status>
+    <generatedAt>2025-12-02</generatedAt>
+    <generator>BMAD Story Context Workflow</generator>
+    <sourceStoryPath>docs/sprint-artifacts/1-3-user-registration-endpoint.md</sourceStoryPath>
+  </metadata>
+
+  <story>
+    <asA>a user</asA>
+    <iWant>to be able to create a new account</iWant>
+    <soThat>I can access the application</soThat>
+    <tasks>
+- [ ] **Task 1: Implement FastAPI Registration Endpoint** (AC: 1, 2, 3, 4)
+  - [ ] Create a new endpoint `POST /api/v1/auth/register` in the FastAPI application within `api/api/v1/endpoints`.
+  - [ ] Define input schema for user registration (name, email, password) using Pydantic.
+  - [ ] Implement logic to interact with Supabase client to create the new user in `auth.users`.
+  - [ ] Handle error scenarios where Supabase reports an existing email, returning a 400 HTTP error.
+  - [ ] Upon successful user creation in `auth.users`, extract the user ID and create a corresponding entry in the `profiles` table in the database.
+  - [ ] Return the JWT token received from Supabase upon successful registration.
+- [ ] **Task 2: Write Unit/Integration Tests for Registration Endpoint** (AC: 1, 2, 3, 4)
+  - [ ] Create a new test file (e.g., `test_auth_endpoints.py`) within `api/tests/` to cover authentication-related endpoints.
+  - [ ] Write a test case for successful user registration, verifying a 200/201 HTTP status code, the structure of the successful response (e.g., presence of JWT), and that a user is created in Supabase `auth.users` and `profiles` table.
+  - [ ] Write a test case for attempting to register with an already existing email, verifying a 400 HTTP status code and an appropriate error message.
+  - [ ] Ensure tests leverage the FastAPI TestClient for efficient endpoint testing.
+    </tasks>
+  </story>
+
+  <acceptanceCriteria>
+1.  **Given** a user provides a valid name, email, and password, **When** a POST request is sent to the `/api/v1/auth/register` endpoint, **Then** a new user account is created in the `auth.users` table in Supabase. (Source: `docs/epics.md#story-1.3`, `docs/architecture.md#4-database-schema`)
+2.  **And** a corresponding entry for the user's public profile is inserted into the `profiles` table with `id` linked to `auth.users.id`, `name`, and `created_at`. (Source: `docs/epics.md#story-1.3`, `docs/architecture.md#4-database-schema`)
+3.  **And** a success response with a JWT token provided by Supabase is returned to the user. (Source: `docs/epics.md#story-1.3`)
+4.  **And** if the email already exists in `auth.users`, a 400 Bad Request error is returned. (Source: `docs/epics.md#story-1.3`)
+  </acceptanceCriteria>
+
+  <artifacts>
+    <docs>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.3: User Registration Endpoint</section>
+        <snippet>
+As a user, I want to be able to create a new account, so that I can access the application.
+
+**Acceptance Criteria:**
+- Given a user provides a valid name, email, and password
+- When a POST request is sent to the `/api/v1/auth/register` endpoint
+- Then a new user account is created in the database with a hashed password.
+- And a success response with a JWT token is returned.
+- And if the email already exists, a 400 error is returned.
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>FR-1: User Account Management</section>
+        <snippet>Users must be able to create, log in to, and log out of their accounts, with persistent sessions automatically logging them in on return visits. (MVP)</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Solution Architecture</title>
+        <section>Database Schema - `profiles` Table</section>
+        <snippet>The `profiles` table is linked to `auth.users.id` and stores public user information like name and creation date.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Solution Architecture</title>
+        <section>API Endpoint Specification</section>
+        <snippet>The architecture does not explicitly list a `/register` endpoint, but implies its existence within the authentication flow. The story itself defines the endpoint as `POST /api/v1/auth/register`.</snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Solution Architecture</title>
+        <section>Services &amp; Data Flow</section>
+        <snippet>
+graph LR
+    A[User's Browser] -- HTTPS --> B(Next.js Frontend);
+    B -- API Calls --> C(FastAPI Backend);
+    C -- Python Client --> D(Supabase Auth);
+    C -- Python Client --> E(Supabase Database);
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/architecture.md</path>
+        <title>Solution Architecture</title>
+        <section>Project Structure &amp; Implementation Patterns - Backend</section>
+        <snippet>
+api/
+├── main.py
+├── api/
+│   └── v1/
+│       ├── endpoints/
+│       └── dependencies.py
+├── core/
+│   ├── config.py
+│   └── security.py
+...
+        </snippet>
+      </doc>
+      <doc>
+        <path>docs/epics.md</path>
+        <title>Epic Breakdown</title>
+        <section>Story 1.3 - Technical Notes</section>
+        <snippet>This FastAPI endpoint will handle user registration by interacting with the Supabase authentication API. It will create the user in `auth.users` and, upon successful creation, insert a corresponding entry into the public `profiles` table. Upon success, it will return the JWT token provided by Supabase.</snippet>
+      </doc>
+      <doc>
+        <path>docs/PRD.md</path>
+        <title>Product Requirements Document</title>
+        <section>Authentication &amp; Authorization</section>
+        <snippet>The application will feature a secure authentication system. Users will register and log in to access their personal study materials. The backend, built with FastAPI, will enforce strict, token-based access controls to ensure a user can only ever view and manage their own data.</snippet>
+      </doc>
+    </docs>
+    <code>
+      <artifact>
+        <path>api/api/v1/endpoints/auth.py</path>
+        <kind>new_file</kind>
+        <symbol>router = APIRouter()</symbol>
+        <reason>This is the target location for the new authentication-related endpoints, including registration.</reason>
+      </artifact>
+      <artifact>
+        <path>api/tests/test_auth_endpoints.py</path>
+        <kind>new_file</kind>
+        <symbol>def test_register_user_success():</symbol>
+        <reason>This is the target location for tests related to the new registration endpoint.</reason>
+      </artifact>
+    </code>
+    <dependencies>
+      <dependency ecosystem="Node.js">
+        <path>app/package.json</path>
+        <package name="next" version="16.0.5" />
+        <package name="react" version="19.2.0" />
+        <package name="react-dom" version="19.2.0" />
+        <package name="typescript" version="^5" />
+      </dependency>
+      <dependency ecosystem="Python">
+        <path>api/requirements.txt</path>
+        <package name="fastapi" version="0.104.1" />
+        <package name="uvicorn" version="0.23.2" />
+        <package name="pydantic" version="1.10.12" />
+        <package name="pytest" version="7.4.0" />
+      </dependency>
+    </dependencies>
+  </artifacts>
+
+  <constraints>
+    <constraint>Backend implementation must be within the `/api` (FastAPI) project.</constraint>
+    <constraint>All API endpoints must be prefixed with `/api/v1`.</constraint>
+    <constraint>Authentication must be handled by Supabase's built-in services.</constraint>
+    <constraint>A new public profile must be created in the `profiles` table upon successful registration, matching the defined schema.</constraint>
+  </constraints>
+  <interfaces>
+    <interface>
+      <name>User Registration</name>
+      <kind>REST</kind>
+      <signature>POST /api/v1/auth/register</signature>
+      <path>api/api/v1/endpoints/auth.py</path>
+    </interface>
+  </interfaces>
+  <tests>
+    <standards>Unit and integration tests for the API backend are written using `pytest`. Tests should leverage the `TestClient` from FastAPI for making requests to the endpoint in a testing context. Tests should follow existing patterns in the project.</standards>
+    <locations>
+      <location>api/tests/</location>
+      <location>api/tests/test_auth_endpoints.py</location>
+    </locations>
+    <ideas>
+      <idea for="AC:1,3">Write a test case for successful user registration. It should mock the Supabase client, verify a 200/201 HTTP status code, and check that the response contains a JWT token.</idea>
+      <idea for="AC:4">Write a test case for attempting to register with an email that already exists. It should verify that the endpoint returns a 400 HTTP status code and an appropriate error message.</idea>
+      <idea for="AC:2">Write a test case to ensure that after a successful registration, a corresponding record is created in the `profiles` table, linked to the new user in `auth.users`.</idea>
+    </ideas>
+  </tests>
+</story-context>
