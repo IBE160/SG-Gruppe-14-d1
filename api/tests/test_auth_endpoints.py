@@ -1,19 +1,14 @@
 import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, MagicMock
-
-# This is a bit of a hack to make the main app importable
-# In a real project, the `api` directory would be a proper Python package.
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent.parent))
+from gotrue.errors import AuthApiError
 from main import app
 
 client = TestClient(app)
 
 @pytest.fixture
 def mock_supabase_client():
-    with patch('api.core.supabase_client.get_supabase_client') as mock_get_client:
+    with patch('core.supabase_client.get_supabase_client') as mock_get_client:
         mock_client = MagicMock()
         mock_get_client.return_value = mock_client
         yield mock_client
@@ -59,7 +54,10 @@ def test_register_user_success(mock_supabase_client):
 def test_register_user_already_exists(mock_supabase_client):
     # Arrange
     # Simulate the exception that Supabase client might raise
-    mock_supabase_client.auth.sign_up.side_effect = Exception("User already registered")
+    mock_supabase_client.auth.sign_up.side_effect = AuthApiError(
+        message="User already registered", 
+        status_code=400
+    )
 
     # Act
     response = client.post(

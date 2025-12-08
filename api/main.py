@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .api.v1.endpoints import auth
+from v1.endpoints import auth
 
 app = FastAPI(title="AI Study Buddy API")
 
